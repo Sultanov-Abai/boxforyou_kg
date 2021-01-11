@@ -5,8 +5,8 @@ const gulp  = require('gulp'),
       autoprefixer = require('gulp-autoprefixer'),
       cleanCSS = require('gulp-clean-css'),
       imagemin = require('gulp-imagemin'),
-      htmlmin = require('gulp-htmlmin');
-
+      htmlmin = require('gulp-htmlmin'),
+      webpack = require("webpack-stream");
 // Static server
 gulp.task('server', function() {
     browserSync.init({
@@ -45,7 +45,7 @@ gulp.task('html', () => {
 });
 
 gulp.task('scripts', () => {
-    return gulp.src("src/js/**/*.js")
+    return gulp.src("src/js/main.js")
         .pipe(gulp.dest("dist/js"));
 });
 
@@ -70,4 +70,37 @@ gulp.task('img', () => {
         .pipe(gulp.dest("dist/img"));
 });
 
-gulp.task('default', gulp.parallel('watch', 'server', 'styles', 'scripts', 'fonts', 'html', 'icons', 'mailer', 'img'));
+gulp.task("build-js", () => {
+    return gulp.src("./src/js/main.js")
+                .pipe(webpack({
+                    mode: 'development',
+                    output: {
+                        filename: 'main.js'
+                    },
+                    watch: true,
+                    devtool: "source-map",
+                    module: {
+                        rules: [
+                          {
+                            test: /\.m?js$/,
+                            exclude: /(node_modules|bower_components)/,
+                            use: {
+                              loader: 'babel-loader',
+                              options: {
+                                presets: [['@babel/preset-env', {
+                                    debug: true,
+                                    corejs: 3,
+                                    useBuiltIns: "usage"
+                                }]]
+                              }
+                            }
+                          }
+                        ]
+                      }
+                }))
+                .pipe(gulp.dest('./dist/js'))
+                .on("end", browserSync.reload);
+});
+
+gulp.task("build", gulp.parallel("build-js"));
+gulp.task('default', gulp.parallel('watch', 'server', 'styles', 'scripts', 'fonts', 'html', 'icons', 'mailer', 'img', "build"));

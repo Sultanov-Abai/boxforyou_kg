@@ -1,0 +1,74 @@
+.catalog
+    padding-top: 30px
+    &__tabs
+        display: flex
+        justify-content: center
+        align-items: center
+        padding-top: 30px
+    &__tab
+        display: flex
+        justify-content: center
+        margin: 0 4px 
+        height: 40px
+        width: 180px
+        background-color: #ffffff
+        border: 2px solid #d0d0d0
+        transform: skewX(-30deg)
+        cursor: pointer
+        &-text
+            margin: auto 0
+            font-size: 24px
+            transform: skewX(30deg)
+            color: #000000
+        &_active
+            background-color: #e70a0a
+    &__content
+        display: none
+        justify-content: space-between
+        flex-wrap: wrap
+        padding-top: 60px
+        &_active
+            display: flex
+    &-item
+        display: block   
+        margin: 10px
+        border: 2px solid #d0d0d0
+        height: 370px
+        width: 290px
+        &_wrapper
+            padding: 10px
+        
+        &_main
+            padding-bottom: 5px
+            line-height: 26px
+            text-align: center
+        &_img
+            height: 200px
+            width: 270px
+        &_name
+            font-size: 19px
+            font-weight: 700
+        &_size
+            font-size: 18px
+            font-weight: 600
+        &_price
+            font-size: 16px
+            font-weight: 600
+            color: #e70a0a      
+        
+        &_footer
+            display: flex
+            justify-content: space-between
+            padding: 5px
+        &_input
+            width: 80px
+            height: 28px
+        .wall
+            height: 35px
+            width: 2px
+            background-color: #585656
+            margin: 0 7px
+        &_basket
+            margin: 0 1px
+            img
+                width: 30px

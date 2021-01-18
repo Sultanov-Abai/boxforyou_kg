@@ -102,5 +102,5 @@ gulp.task("build-js", () => {
                 .on("end", browserSync.reload);
 });
 
-gulp.task("build", gulp.parallel("build-js"));
+gulp.task('build', gulp.parallel('build-js'));
 gulp.task('default', gulp.parallel('watch', 'server', 'styles', 'scripts', 'fonts', 'html', 'icons', 'mailer', 'img', "build"));

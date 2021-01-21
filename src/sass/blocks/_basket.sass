@@ -7,20 +7,22 @@
         min-height: 100vh
         width: 25%
         background-color: #ffffff
+        border: solid 3px $border-color
+        z-index: 3
         &_active
-            display: block
+            display: flex
     .title
         display: inline
         margin: 150px
     &__close
         display: inline
-        margin-left: -40px
+        font-size: 50px
         cursor: pointer
     &__item
         display: flex
-        margin: 20px
+        margin:  25px auto
         width: 360px
-        border: solid 3px #d0d0d0
+        border: solid 3px $border-color
         &_wrapper
             display: flex
             flex-direction: column
@@ -44,6 +46,11 @@
         &-footer
             display: flex
             justify-content: space-evenly
+        &-number
+            display: inline
+            font-size: 14px
+            font-weight: 600
+            padding-bottom: 5px
         &-price
             display: inline
             font-size: 14px
@@ -66,11 +73,12 @@
             cursor: pointer
             height: 28px
     &__hr
-        margin: 0 20px
+        margin: 20px auto
         width: 360px
     &__sum
         display: flex
-        margin: 10px 20px
+        justify-content: center
+        margin: 10px auto
         &-final
             display: flex
             width: 180px

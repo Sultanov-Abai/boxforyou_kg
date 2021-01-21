@@ -1,8 +1,9 @@
-const basket = (basketSelector, cardBtnSelector, basketBtnSelector, basketCloseSelector) => {
+const basket = (basketSelector, basketBtnSelector, basketCloseSelector, catalogItemSelector, basketListSelector) => {
     const basket = document.querySelector(basketSelector),
-          cardBtn = document.querySelectorAll(cardBtnSelector),
           basketBtn = document.querySelector(basketBtnSelector),
-          basketClose = document.querySelector(basketCloseSelector);
+          basketClose = document.querySelector(basketCloseSelector),
+          catalogItems = document.querySelectorAll(catalogItemSelector),
+          basketList = document.querySelector(basketListSelector);
 
     function showBasket(item) {
         basketBtn.addEventListener('click', () => {
@@ -19,26 +20,28 @@ const basket = (basketSelector, cardBtnSelector, basketBtnSelector, basketCloseS
     showBasket(basket);
     hideBasket(basket);
 
-    const catalogItems = document.querySelectorAll('.catalog-item');
-    const basketList = document.querySelector('.basket__list');
     catalogItems.forEach((catalogItem, i) => {
-        catalogItem.addEventListener('click', (e) => {
-            if (e.target.classList.contains('catalog-item_image')) {
-                const {img, name, size, price} = catalogItem.dataset,
+        catalogItem.addEventListener('click', e => {
+            if (e.target.classList.contains('catalog-item_basket')) {
+                let {img, name, size, price} = catalogItem.dataset,
                       basketItem = document.createElement('div');
                 let number = document.querySelectorAll('.catalog-item_input')[i].value;
 
-                const itemTotal = price * number;
+                let itemTotal = price * number;
+
+                if (number > 9) {
+                    itemTotal = itemTotal - itemTotal * 0.1;
+                }
 
                 basketItem.innerHTML = `
                     <div class="basket__item">
                         <img src="${img}" alt="box" class="basket__item-image">
                         <div class="basket__item_wrapper">
                             <div class="basket__item-name">${name}</div>
-                            <div class="basket__item-size">${size}мм</div>
+                            <div class="basket__item-size">${size}</div>
                             <div class="basket__item-footer">
                                 <div class="basket__item-price">Цена: ${price}сом</div>
-                                <div class="basket__item-number">Кол-во: ${number}</div>
+                                <div class="basket__item-number">кол-во: ${number}</div>
                             </div>
                             <hr>
                             <div class="basket__item-total_wrapper">
@@ -49,25 +52,30 @@ const basket = (basketSelector, cardBtnSelector, basketBtnSelector, basketCloseS
                         <div class="basket__item-close">&times;</div>
                     </div>
                 `;
-                basketList.append(basketItem);
+                basketList.append(basketItem);               
 
-                const items = document.querySelectorAll('.basket__item-total_num');
-                const sum = [...items].reduce((count, item) => {
+                const basketItems = document.querySelectorAll('.basket__item-total_num'),
+                      finalSum = document.querySelector('.basket__sum-num');
+                const sum = [...basketItems].reduce((count, item) => {
                 count += parseFloat(item.textContent.replace(/(\..*)\./g, ""));
                 return count;
                 }, 0);
-                document.querySelector('.basket__sum-num').innerHTML = sum;
+                finalSum.innerHTML = sum;
+
+                const basketElems = document.querySelectorAll('.basket__item');
+                basketElems.forEach((basketEl, i) => {
+                    basketEl.addEventListener('click', e => {
+                        if (e.target.classList.contains('basket__item-close')) {
+                            basketEl.remove();
+                            document.querySelector('.basket__sum-num').innerHTML = sum - basketItems[i].innerHTML;
+                        }
+                    });
+                });
 
             basket.style.display = 'block';
             }
         });
-
-    });
-
-    // document.querySelector('.button').addEventListener('click', () => {
-    //     let a = document.querySelector('.input').value;
-    //     document.querySelector('.text').innerHTML = a;
-    // });
+    });   
 };
 
 export default basket;

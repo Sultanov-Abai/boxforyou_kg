@@ -1,0 +1,186 @@
+@media (max-width: 1200px)
+    .container
+        width: 100%
+    .basket__content
+        width: 380px
+    .menu
+        &__consult-phone
+            font-size: 20px
+@media (max-width: 991px)
+    .container
+        width: 100%
+    .catalog
+        &-item
+            &_input
+                width: 48%
+    .basket
+        &__content
+            width: 340px
+        &__item
+            width: 97%
+            &-close
+                right: 0
+                padding-right: 0
+            &-name
+                font-size: 15px
+            &-size
+                font-size: 14px
+            &-footer
+                flex-direction: column
+            hr
+                margin: 5px
+@media (max-width: 767px)
+    .container
+        width: 100%
+    .menu
+        &__name
+            font-size: 21px
+        &__list
+            padding: 0
+        &__item
+            padding: 0 10px
+    .catalog
+        &__tab
+            width: 150px
+        &-item
+            width: 260px
+            &_img
+                width: 99%
+@media (max-width: 575px)
+    .menu
+        padding-left: 0
+        &__logo
+            img
+                height: 50px
+        &__name 
+            display: none
+        &__link
+            font-size: 18px
+        &__consult
+            &-phone
+                font-size: 18px
+    .btn-basket
+        right: 10px
+        height: 40px
+        width: 40px
+        img
+            margin-left: -3px
+            margin-top: 2px
+    .title_black
+        font-size: 32px
+    .catalog
+        &__tab
+            width: 130px
+            &-text
+                font-size: 18px
+        &-item
+            width: 280px
+            &_wrapper
+                padding: 5px
+    .basket
+        &__content
+            width: 50%
+        .title_black
+            font-size: 27px
+        &__close
+            font-size: 40px
+        &__item
+            width: 94%
+            flex-direction: column
+            &-close
+                position: absolute
+                right: 10px
+            &-image
+                width: 95%
+            &-footer
+                flex-direction: row
+        &__sum
+            &-total
+                padding-left: 8px
+                font-size: 17px
+            &-num
+                padding-left: 5px
+                font-size: 18px
+            .btn-order
+                width: 56%
+                height: 35px
+                font-size: 16px
+    .footer
+        &__info
+            padding: 30px
+            height: 30%
+            width: 60%
+    .modal
+        &__close
+            top: 5px
+            right: 15px
+@media (max-width: 415px)
+    .menu
+        &__list
+            display: flex
+            left: -100%
+            position: absolute
+            top: 100%
+            margin: 0 auto
+            transition: 0.6s all
+            &_active
+                left: 10%
+        &__consult
+            position: absolute
+            right: 40px
+    .hamburger
+        display: block
+        position: absolute
+        right: 10px
+        top: 50%
+        transform: translateY(-50%)
+        width: 26px
+        height: 12px
+        span
+            display: block
+            height: 2px
+            width: 100%
+            background-color: #000
+            margin-bottom: 2px
+            transition: 0.5s all
+        &_active
+            span
+                margin-bottom: -2px
+                &:nth-child(1)
+                    transform: translateY(3px) rotate(-45deg)
+                &:nth-child(2)
+                    display: none
+                &:nth-child(3)
+                    transform: translateY(3px) rotate(45deg)
+    .catalog
+        padding-top: 20px
+        &__tabs
+            margin: 0
+        &__tab
+            margin: 0 2px
+            width: 120px
+            transform: skewX(0)
+            &-text
+                transform: skewX(0)
+                font-size: 16px
+    .footer
+        &__info
+            height: 24%
+        &__addr
+            font-size: 20px
+            margin-bottom: 20px
+        &__phone
+            font-size: 20px
+            margin-bottom: 20px
+        &__social
+            &-item
+                width: 40px
+                height: 40px
+    .btn-basket
+        right: 5px
+        img
+            margin-top: -3px
+    .modal
+        &__close
+            top: 5px
+            right: 15px

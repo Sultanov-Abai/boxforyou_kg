@@ -1,6 +1,9 @@
 .menu
     display: flex
-    height: 70px      
+    align-items: end
+    position: relative
+    height: 70px
+    padding-left: 0
     &__logo
         display: flex
         text-decoration: none
@@ -13,12 +16,13 @@
         font-size: 25px
         font-weight: 900     
     &__list
+        padding-left: 0
         margin: 27px auto
     &__item
         display: inline
         padding: 0 30px
         border-right: solid black
-        &:nth-child(4)
+        &:last-child
             border-right: 0
     &__link
         color: black
@@ -35,14 +39,9 @@
             text-align: center
         &-phone
             display: block
-            font-size: 19px
+            padding-top: 22px
+            font-size: 22px
             text-decoration: none
             text-align: center
-        &-btn
-            height: 35px
-            width: 170px
-            border-radius: 6%
-            background-color: $main-color
-            color: #f3ecec
-            font-size: 19px  
-            text-align: center
+.hamburger
+    display: none

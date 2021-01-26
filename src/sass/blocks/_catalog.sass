@@ -6,6 +6,7 @@
         justify-content: center
         align-items: center
         padding-top: 30px
+        padding-left: 0
     &__tab
         display: flex
         justify-content: center
@@ -15,7 +16,8 @@
         background-color: #ffffff
         border: 2px solid $border-color
         transform: skewX(-30deg)
-        cursor: pointer
+        cursor: pointer 
+        transition: 0.5s all
         &-text
             margin: auto 0
             font-size: 24px
@@ -25,11 +27,30 @@
             background-color: $main-color
     &__content
         display: none
-        justify-content: space-between
         flex-wrap: wrap
         padding-top: 60px
+        transition: 1s all
         &_active
             display: flex
+    &__pag
+        display: none
+        justify-content: center
+        flex-wrap: wrap
+        transition: 0.5s all
+        &-tabs
+            display: flex
+            justify-content: center
+            margin: 0 auto
+            transition: 0.5s all
+        &-tab
+            display: flex
+            padding: 5px
+            font-size: 20px
+            cursor: pointer
+            transition: 0.5s all
+            &_active
+                font-weight: 700
+                text-decoration: underline
     &-item
         display: block   
         margin: 10px
@@ -37,8 +58,7 @@
         height: 370px
         width: 290px
         &_wrapper
-            padding: 10px
-        
+            padding: 10px      
         &_main
             padding-bottom: 5px
             line-height: 26px
@@ -46,6 +66,12 @@
         &_img
             height: 200px
             width: 270px
+            transition: 0.5s all
+            &-hidden
+                display: none
+                height: 200px
+                width: 270px
+                transition: 0.5s all
         &_name
             font-size: 19px
             font-weight: 700
@@ -55,8 +81,7 @@
         &_price
             font-size: 16px
             font-weight: 600
-            color: $main-color     
-        
+            color: $main-color       
         &_footer
             display: flex
             justify-content: space-between

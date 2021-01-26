@@ -1,24 +1,37 @@
-const forms = () => {
-    const form = document.querySelector('form');
+const forms = (formSelector, formIdSelector, formNameSelector, formPhoneSelector, formSumSelector,thanksFormSelector, grossSelector) => {
+    const form = document.querySelector(formSelector),
+          formId = document.querySelector(formIdSelector),
+          formName = document.querySelector(formNameSelector),
+          formPhone = document.querySelector(formPhoneSelector),
+          formSum = document.querySelector(formSumSelector),
+          thanksForm = document.querySelector(thanksFormSelector),
+          gross = document.querySelector(grossSelector);
+    let id = 1;
     
-    form.submit(e => {
+    const addId = () => {
+        formId.value = id;
+    };
+
+    addId();
+
+    form.addEventListener('submit', e => {
         e.preventDefault();
         
-        const request = new XMLHttpRequest();
+        let formData = new FormData(form);
+        let request = new XMLHttpRequest();
 
-        request.open("POST", ('mailer1/smart.php'));
-        request.send();
+        request.open('POST', 'mailer/smart.php', true);
+        request.send(formData);
 
-        request.addEventListener('load', i => {
-            if (request.status === 200) {
-                document.querySelector('#thanks').style.display = 'block';
-                i.find("input").value("");
-                console.log('Nice!!!');
-            } else {
-                console.log('Something is bad');
-            }
-            return false;
-        });
+        formName.value = '';
+        formPhone.value = '';
+        formSum.value = '';
+
+        id = id + 1;
+        addId();
+
+        gross.style.display = 'none';
+        thanksForm.style.display = 'block';
     });
 };
 

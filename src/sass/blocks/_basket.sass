@@ -1,27 +1,32 @@
-.basket  
+.basket
     &__content
         display: none
-        position: absolute
+        position: fixed
+        overflow: scroll
         top: 75px
-        right: 10px
-        min-height: 100vh
-        width: 25%
+        right: 0
+        height: 1000px
+        width: 415px
         background-color: #ffffff
         border: solid 3px $border-color
         z-index: 3
         &_active
             display: flex
     .title
-        display: inline
-        margin: 150px
+        display: flex
+        justify-content: center
+        margin-top: 10px
     &__close
         display: inline
+        position: absolute
+        top: 1px
+        right: 1%
         font-size: 50px
         cursor: pointer
     &__item
         display: flex
         margin:  25px auto
-        width: 360px
+        width: 92%
         border: solid 3px $border-color
         &_wrapper
             display: flex
@@ -29,7 +34,7 @@
             margin: 5px 5px 5px 0
         &-image
             display: inline
-            width: 160px
+            width: 50%
             margin: 5px
         &-name
             display: inline
@@ -58,7 +63,7 @@
             color: $main-color  
             padding-bottom: 5px
         hr
-            width: 150px
+            width: 100%
         &-total
             padding-left: 50px
             font-weight: 700
@@ -68,20 +73,24 @@
             &_num
                 padding-left: 5px
         &-close
+            position: relative
+            right: 11px
             padding-right: 5px
             font-size: 28px
             cursor: pointer
             height: 28px
     &__hr
         margin: 20px auto
-        width: 360px
+        width: 100%
     &__sum
         display: flex
         justify-content: center
+        width: 100%
         margin: 10px auto
         &-final
             display: flex
-            width: 180px
+            justify-content: center
+            width: 50%
             margin: 8px 0
         &-total
             color: #000

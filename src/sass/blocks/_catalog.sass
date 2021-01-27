@@ -32,8 +32,46 @@
         transition: 1s all
         &_active
             display: flex
-    &__pag
-        display: none
+    &__craft
+        display: flex
+        justify-content: center
+        flex-wrap: wrap
+        transition: 0.5s all
+        &-tabs
+            display: flex
+            justify-content: center
+            margin: 0 auto
+            transition: 0.5s all
+        &-tab
+            display: flex
+            padding: 5px
+            font-size: 20px
+            cursor: pointer
+            transition: 0.5s all
+            &_active
+                font-weight: 700
+                text-decoration: underline
+    &__holiday
+        display: flex
+        justify-content: center
+        flex-wrap: wrap
+        transition: 0.5s all
+        &-tabs
+            display: flex
+            justify-content: center
+            margin: 0 auto
+            transition: 0.5s all
+        &-tab
+            display: flex
+            padding: 5px
+            font-size: 20px
+            cursor: pointer
+            transition: 0.5s all
+            &_active
+                font-weight: 700
+                text-decoration: underline
+    &__screen
+        display: flex
         justify-content: center
         flex-wrap: wrap
         transition: 0.5s all
@@ -66,12 +104,10 @@
         &_img
             height: 200px
             width: 270px
-            transition: 0.5s all
             &-hidden
                 display: none
                 height: 200px
                 width: 270px
-                transition: 0.5s all
         &_name
             font-size: 19px
             font-weight: 700

@@ -9,9 +9,11 @@ window.addEventListener('DOMContentLoaded', () => {
     "use strict";
     
     tabs('.catalog__tabs', '.catalog__tab', '.catalog__content', 'catalog__tab_active');
-    tabs('.catalog__pag-tabs', '.catalog__pag-tab', '.catalog__pag', 'catalog__pag-tab_active');
+    tabs('.catalog__craft-tabs', '.catalog__craft-tab', '.catalog__craft', 'catalog__craft-tab_active');
+    tabs('.catalog__holiday-tabs', '.catalog__holiday-tab', '.catalog__holiday', 'catalog__holiday-tab_active');
+    tabs('.catalog__screen-tabs', '.catalog__screen-tab', '.catalog__screen', 'catalog__screen-tab_active');
     basket('.basket__content', '.btn-basket', '.basket__close', '.catalog-item', '.basket__list');
-    modals('.overlay', '#gross', '.btn-order', '.modal', '.form__sum-num', '.basket__sum-num', '.modal__descr', '.basket__item-name');
+    modals('.overlay', '#gross', '.btn-order', '.modal', '.form__sum-num', '.basket__sum-num', '.modal__descr');
     pictures('.catalog-item', '.catalog-item_img', '.catalog-item_img-hidden');
     forms('form', '.form__id-num', '.form__name', '.form__phone', '.form__sum-num', '#thanks', '#gross');
     header();

@@ -2488,9 +2488,11 @@ window.addEventListener('DOMContentLoaded', function () {
   "use strict";
 
   Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_0__["default"])('.catalog__tabs', '.catalog__tab', '.catalog__content', 'catalog__tab_active');
-  Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_0__["default"])('.catalog__pag-tabs', '.catalog__pag-tab', '.catalog__pag', 'catalog__pag-tab_active');
+  Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_0__["default"])('.catalog__craft-tabs', '.catalog__craft-tab', '.catalog__craft', 'catalog__craft-tab_active');
+  Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_0__["default"])('.catalog__holiday-tabs', '.catalog__holiday-tab', '.catalog__holiday', 'catalog__holiday-tab_active');
+  Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_0__["default"])('.catalog__screen-tabs', '.catalog__screen-tab', '.catalog__screen', 'catalog__screen-tab_active');
   Object(_modules_basket__WEBPACK_IMPORTED_MODULE_1__["default"])('.basket__content', '.btn-basket', '.basket__close', '.catalog-item', '.basket__list');
-  Object(_modules_modals__WEBPACK_IMPORTED_MODULE_2__["default"])('.overlay', '#gross', '.btn-order', '.modal', '.form__sum-num', '.basket__sum-num', '.modal__descr', '.basket__item-name');
+  Object(_modules_modals__WEBPACK_IMPORTED_MODULE_2__["default"])('.overlay', '#gross', '.btn-order', '.modal', '.form__sum-num', '.basket__sum-num', '.modal__descr');
   Object(_modules_pictures__WEBPACK_IMPORTED_MODULE_4__["default"])('.catalog-item', '.catalog-item_img', '.catalog-item_img-hidden');
   Object(_modules_forms__WEBPACK_IMPORTED_MODULE_3__["default"])('form', '.form__id-num', '.form__name', '.form__phone', '.form__sum-num', '#thanks', '#gross');
   Object(_modules_header__WEBPACK_IMPORTED_MODULE_5__["default"])();
@@ -2704,19 +2706,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var modals = function modals(overlaySelector, grossSelector, btnOrderSelector, modalsSelector, modalSumSelector, basketSumSelector, modalListSelector, itemNameSelector, itemSizeSelector, itemNumberSelector, itemSumSelector) {
+var modals = function modals(overlaySelector, grossSelector, btnOrderSelector, modalsSelector, modalSumSelector, basketSumSelector, modalListSelector) {
   var overlay = document.querySelector(overlaySelector),
       gross = document.querySelector(grossSelector),
       btnOrder = document.querySelector(btnOrderSelector),
       modals = document.querySelectorAll(modalsSelector),
       modalSum = document.querySelector(modalSumSelector),
       basketSum = document.querySelector(basketSumSelector),
-      modalList = document.querySelector(modalListSelector),
-      names = document.querySelectorAll(itemNameSelector),
-      sizes = document.querySelectorAll(itemSizeSelector),
-      numbers = document.querySelectorAll(itemNumberSelector),
-      sums = document.querySelectorAll(itemSumSelector);
-  var id = 0;
+      modalList = document.querySelector(modalListSelector);
   modals.forEach(function (modal) {
     modal.addEventListener('click', function (e) {
       if (e.target.classList.contains('modal__close')) {
@@ -2728,6 +2725,10 @@ var modals = function modals(overlaySelector, grossSelector, btnOrderSelector, m
   btnOrder.addEventListener('click', function () {
     gross.style.display = 'block';
     overlay.style.display = 'block';
+    var names = document.querySelectorAll('.basket__item-name'),
+        sizes = document.querySelectorAll('.basket__item-size'),
+        numbers = document.querySelectorAll('.basket__item-number'),
+        sums = document.querySelectorAll('.basket__item-total_num');
     var quantity = sums.length;
     var i = 0;
 
@@ -2774,6 +2775,14 @@ var pictures = function pictures(catalogItemsSelector, showedImagesSelector, hid
       if (!e.target.classList.contains('catalog-item_img')) {
         hiddenImages[i].style.display = 'none';
         showedImages[i].style.display = 'block';
+        showedImages[i].style.transform = 'scale(1)';
+        hiddenImages[i].style.transform = 'scale(1)';
+      }
+    });
+    catalogItem.addEventListener('click', function (e) {
+      if (e.target.classList.contains('catalog-item_img') || e.target.classList.contains('catalog-item_img-hidden')) {
+        showedImages[i].style.transform = 'scale(1.4)';
+        hiddenImages[i].style.transform = 'scale(1.4)';
       }
     });
   });

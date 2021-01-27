@@ -1,17 +1,11 @@
-const modals = (overlaySelector, grossSelector, btnOrderSelector, modalsSelector, modalSumSelector, basketSumSelector, modalListSelector, itemNameSelector, itemSizeSelector, itemNumberSelector, itemSumSelector) => {
+const modals = (overlaySelector, grossSelector, btnOrderSelector, modalsSelector, modalSumSelector, basketSumSelector, modalListSelector) => {
     const overlay = document.querySelector(overlaySelector),
           gross = document.querySelector(grossSelector),
           btnOrder = document.querySelector(btnOrderSelector),
           modals = document.querySelectorAll(modalsSelector),
           modalSum = document.querySelector(modalSumSelector),
           basketSum = document.querySelector(basketSumSelector),
-          modalList = document.querySelector(modalListSelector),
-          names = document.querySelectorAll(itemNameSelector),
-          sizes = document.querySelectorAll(itemSizeSelector),
-          numbers = document.querySelectorAll(itemNumberSelector),
-          sums = document.querySelectorAll(itemSumSelector);
-
-    let id = 0;
+          modalList = document.querySelector(modalListSelector);
 
     modals.forEach((modal) => {
         modal.addEventListener('click', (e) => {
@@ -25,7 +19,11 @@ const modals = (overlaySelector, grossSelector, btnOrderSelector, modalsSelector
     btnOrder.addEventListener('click', () => {
         gross.style.display = 'block';
         overlay.style.display = 'block';
-
+    
+        const names = document.querySelectorAll('.basket__item-name'),
+              sizes = document.querySelectorAll('.basket__item-size'),
+              numbers = document.querySelectorAll('.basket__item-number'),
+              sums = document.querySelectorAll('.basket__item-total_num');
         const quantity = sums.length;
         
         let i = 0;

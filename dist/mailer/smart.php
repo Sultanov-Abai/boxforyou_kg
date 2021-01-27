@@ -1,5 +1,6 @@
 <?php 
 
+$id = $_POST['id'];
 $name = $_POST['name'];
 $phone = $_POST['phone'];
 $list = $_POST['list'];
@@ -29,7 +30,7 @@ $mail->addAddress('elmira.eleu@gmail.com');     // Add a recipient
 //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
 $mail->isHTML(true);                                  // Set email format to HTML
 
-$mail->Subject = 'Данные';
+$mail->Subject = 'Заказ №' . $id;
 $mail->Body    = '
 		Пользователь оставил данные <br> 
 	Имя: ' . $name . ' <br>

@@ -1,7 +1,9 @@
-const pictures = (catalogItemsSelector, showedImagesSelector, hiddenImagesSelector) => {
+const pictures = (catalogItemsSelector, showedImagesSelector, hiddenImagesSelector, overlaySelector) => {
     const catalogItems = document.querySelectorAll(catalogItemsSelector),
           showedImages = document.querySelectorAll(showedImagesSelector),
-          hiddenImages = document.querySelectorAll(hiddenImagesSelector);
+          hiddenImages = document.querySelectorAll(hiddenImagesSelector),
+          overlay = document.querySelector(overlaySelector),
+          imgPopup = document.createElement('div');
 
     catalogItems.forEach((catalogItem, i) => {
         catalogItem.addEventListener('mouseover', e => {          
@@ -19,10 +21,17 @@ const pictures = (catalogItemsSelector, showedImagesSelector, hiddenImagesSelect
             }
         });
         catalogItem.addEventListener('click', e => {
+            let {img, name, size, price} = catalogItem.dataset;
+
             if (e.target.classList.contains('catalog-item_img') || 
             e.target.classList.contains('catalog-item_img-hidden')) {
-                showedImages[i].style.transform = 'scale(1.4)';
-                hiddenImages[i].style.transform = 'scale(1.4)';
+                overlay.style.display = 'block';
+                imgPopup.innerHTML = `
+                    <div class="popup">
+                        <img src="${img}" alt="box">
+                    </div>
+                `;
+                overlay.append(imgPopup);
             }
         });
     });

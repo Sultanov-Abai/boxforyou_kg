@@ -7,13 +7,13 @@ const basket = (basketSelector, basketBtnSelector, basketCloseSelector, catalogI
 
     function showBasket(item) {
         basketBtn.addEventListener('click', () => {
-            item.style.display = 'block';
+            item.classList.add('basket__content_active');
         });
     }
 
     function hideBasket(item) {
         basketClose.addEventListener('click', () => {
-            item.style.display = 'none';
+            item.classList.remove('basket__content_active');
         });
     }
 

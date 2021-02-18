@@ -2493,7 +2493,7 @@ window.addEventListener('DOMContentLoaded', function () {
   Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_0__["default"])('.catalog__screen-tabs', '.catalog__screen-tab', '.catalog__screen', 'catalog__screen-tab_active');
   Object(_modules_basket__WEBPACK_IMPORTED_MODULE_1__["default"])('.basket__content', '.btn-basket', '.basket__close', '.catalog-item', '.basket__list');
   Object(_modules_modals__WEBPACK_IMPORTED_MODULE_2__["default"])('.overlay', '#gross', '.btn-order', '.modal', '.form__sum-num', '.basket__sum-num', '.modal__descr');
-  Object(_modules_pictures__WEBPACK_IMPORTED_MODULE_4__["default"])('.catalog-item', '.catalog-item_img', '.catalog-item_img-hidden');
+  Object(_modules_pictures__WEBPACK_IMPORTED_MODULE_4__["default"])('.catalog-item', '.catalog-item_img', '.catalog-item_img-hidden', '.overlay');
   Object(_modules_forms__WEBPACK_IMPORTED_MODULE_3__["default"])('form', '.form__id-num', '.form__name', '.form__phone', '.form__sum-num', '#thanks', '#gross');
   Object(_modules_header__WEBPACK_IMPORTED_MODULE_5__["default"])();
 });
@@ -2552,13 +2552,13 @@ var basket = function basket(basketSelector, basketBtnSelector, basketCloseSelec
 
   function showBasket(item) {
     basketBtn.addEventListener('click', function () {
-      item.style.display = 'block';
+      item.classList.add('basket__content_active');
     });
   }
 
   function hideBasket(item) {
     basketClose.addEventListener('click', function () {
-      item.style.display = 'none';
+      item.classList.remove('basket__content_active');
     });
   }
 
@@ -2719,12 +2719,19 @@ var modals = function modals(overlaySelector, grossSelector, btnOrderSelector, m
       if (e.target.classList.contains('modal__close')) {
         modal.style.display = 'none';
         overlay.style.display = 'none';
+        document.body.style.overflow = '';
       }
+    });
+    overlay.addEventListener('click', function () {
+      modal.style.display = 'none';
+      overlay.style.display = 'none';
+      document.body.style.overflow = '';
     });
   });
   btnOrder.addEventListener('click', function () {
     gross.style.display = 'block';
     overlay.style.display = 'block';
+    document.body.style.overflow = 'hidden';
     var names = document.querySelectorAll('.basket__item-name'),
         sizes = document.querySelectorAll('.basket__item-size'),
         numbers = document.querySelectorAll('.basket__item-number'),
@@ -2755,15 +2762,20 @@ var modals = function modals(overlaySelector, grossSelector, btnOrderSelector, m
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_array_for_each_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.for-each.js */ "./node_modules/core-js/modules/es.array.for-each.js");
 /* harmony import */ var core_js_modules_es_array_for_each_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_2__);
 
 
 
-var pictures = function pictures(catalogItemsSelector, showedImagesSelector, hiddenImagesSelector) {
+
+var pictures = function pictures(catalogItemsSelector, showedImagesSelector, hiddenImagesSelector, overlaySelector) {
   var catalogItems = document.querySelectorAll(catalogItemsSelector),
       showedImages = document.querySelectorAll(showedImagesSelector),
-      hiddenImages = document.querySelectorAll(hiddenImagesSelector);
+      hiddenImages = document.querySelectorAll(hiddenImagesSelector),
+      overlay = document.querySelector(overlaySelector),
+      imgPopup = document.createElement('div');
   catalogItems.forEach(function (catalogItem, i) {
     catalogItem.addEventListener('mouseover', function (e) {
       if (e.target.classList.contains('catalog-item_img')) {
@@ -2780,9 +2792,16 @@ var pictures = function pictures(catalogItemsSelector, showedImagesSelector, hid
       }
     });
     catalogItem.addEventListener('click', function (e) {
+      var _catalogItem$dataset = catalogItem.dataset,
+          img = _catalogItem$dataset.img,
+          name = _catalogItem$dataset.name,
+          size = _catalogItem$dataset.size,
+          price = _catalogItem$dataset.price;
+
       if (e.target.classList.contains('catalog-item_img') || e.target.classList.contains('catalog-item_img-hidden')) {
-        showedImages[i].style.transform = 'scale(1.4)';
-        hiddenImages[i].style.transform = 'scale(1.4)';
+        overlay.style.display = 'block';
+        imgPopup.innerHTML = "\n                    <div class=\"popup\">\n                        <img src=\"".concat(img, "\" alt=\"box\">\n                    </div>\n                ");
+        overlay.append(imgPopup);
       }
     });
   });

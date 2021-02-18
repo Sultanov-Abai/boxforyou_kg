@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>boxforyou</title>
+    <link rel="shortcut icon" href="icons/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/style.min.css">
     <meta name="viewport" id="viewport">
 </head>
 <body>
-    <nav>
+    <nav id="header">
         <div class="container">
             <ul class="menu">
                 <a href="#" class="menu__logo">
@@ -16,7 +17,7 @@
                     <h1 class="menu__name">boxforyou</h1>
                 </a>
                 <ul class="menu__list">
-                    <li class="menu__item"><a href="#" class="menu__link">Главная</a></li>
+                    <li class="menu__item"><a href="#header" class="menu__link">Главная</a></li>
                     <li class="menu__item"><a href="#catalog" class="menu__link">Каталог</a></li>
                     <li class="menu__item"><a href="#" class="menu__link">О нас</a></li>
                 </ul>
@@ -74,13 +75,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="catalog-item" data-img="" data-name="Коробка бурая + бурое дно" data-size="230*170*90мм" data-price="120">
+                    <div class="catalog-item" data-img="img/boxes/315_215_81_бурая_.jpg" data-name="Коробка бурая + бурое дно" data-size="230*170*90мм" data-price="120">
                         <div class="catalog-item_wrapper">
                             <div class="catalog-item_main">
-                                <img src="img/boxes/image6.jpeg" alt="box" class="catalog-item_img">
-                                <img class="catalog-item_img-hidden" src="img/boxes/image1.jpeg" alt="box"">
-                                <div class="catalog-item_name">Коробка бурая + бурое дно</div>
-                                <div class="catalog-item_size">230*170*90мм</div>
+                                <img src="img/boxes/315_215_81_бурая_.jpg" alt="box" class="catalog-item_img">
+                                <img class="catalog-item_img-hidden" src="img/boxes/315_215_81_бурая__1_.jpg" alt="box"">
+                                <div class="catalog-item_name">Коробка микрогоф бурая</div>
+                                <div class="catalog-item_size">315*215*81мм</div>
                                 <div class="catalog-item_price">120сом</div>
                             </div>
                             <hr>
@@ -841,6 +842,10 @@
             <div class="modal__descr"></div>
         </div>
     </div>
+
+    <!-- <div class="popup">
+        <img src="img/boxes/350-250-90__4_.jpg" alt="box">
+    </div> -->
 
     <script src="js/main.js"></script>
 </body>

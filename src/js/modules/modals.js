@@ -8,17 +8,24 @@ const modals = (overlaySelector, grossSelector, btnOrderSelector, modalsSelector
           modalList = document.querySelector(modalListSelector);
 
     modals.forEach((modal) => {
-        modal.addEventListener('click', (e) => {
+        modal.addEventListener('click', e => {
             if (e.target.classList.contains('modal__close')) {
                 modal.style.display = 'none';
                 overlay.style.display = 'none';
+                document.body.style.overflow = '';
             }
         });
-    });
+        overlay.addEventListener('click', () => {
+            modal.style.display = 'none';
+            overlay.style.display = 'none';
+            document.body.style.overflow = '';
+        });
+    });  
 
     btnOrder.addEventListener('click', () => {
         gross.style.display = 'block';
         overlay.style.display = 'block';
+        document.body.style.overflow = 'hidden';
     
         const names = document.querySelectorAll('.basket__item-name'),
               sizes = document.querySelectorAll('.basket__item-size'),

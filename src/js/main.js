@@ -14,7 +14,7 @@ window.addEventListener('DOMContentLoaded', () => {
     tabs('.catalog__screen-tabs', '.catalog__screen-tab', '.catalog__screen', 'catalog__screen-tab_active');
     basket('.basket__content', '.btn-basket', '.basket__close', '.catalog-item', '.basket__list');
     modals('.overlay', '#gross', '.btn-order', '.modal', '.form__sum-num', '.basket__sum-num', '.modal__descr');
-    pictures('.catalog-item', '.catalog-item_img', '.catalog-item_img-hidden');
+    pictures('.catalog-item', '.catalog-item_img', '.catalog-item_img-hidden', '.overlay');
     forms('form', '.form__id-num', '.form__name', '.form__phone', '.form__sum-num', '#thanks', '#gross');
     header();
 });

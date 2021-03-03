@@ -15,10 +15,12 @@ const modals = (overlaySelector, grossSelector, btnOrderSelector, modalsSelector
                 document.body.style.overflow = '';
             }
         });
-        overlay.addEventListener('click', () => {
-            modal.style.display = 'none';
-            overlay.style.display = 'none';
-            document.body.style.overflow = '';
+        overlay.addEventListener('click', e => {
+            if (e.target.classList.contains('overlay')) {
+                modal.style.display = 'none';
+                overlay.style.display = 'none';
+                document.body.style.overflow = '';
+            }
         });
     });  
 

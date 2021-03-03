@@ -33,24 +33,23 @@ const basket = (basketSelector, basketBtnSelector, basketCloseSelector, catalogI
                     itemTotal = itemTotal - itemTotal * 0.1;
                 }
 
+                basketItem.classList.add('basket__item');
                 basketItem.innerHTML = `
-                    <div class="basket__item">
-                        <img src="${img}" alt="box" class="basket__item-image">
-                        <div class="basket__item_wrapper">
-                            <div class="basket__item-name">${name}</div>
-                            <div class="basket__item-size">${size}</div>
-                            <div class="basket__item-footer">
-                                <div class="basket__item-price">Цена: ${price}сом</div>
-                                <div class="basket__item-number">кол-во: ${number}</div>
-                            </div>
-                            <hr>
-                            <div class="basket__item-total_wrapper">
-                                <div class="basket__item-total">Итого:</div>
-                                <div class="basket__item-total_num">${itemTotal}</div>
-                            </div>
+                    <img src="${img}" alt="box" class="basket__item-image">
+                    <div class="basket__item_wrapper">
+                        <div class="basket__item-name">${name}</div>
+                        <div class="basket__item-size">${size}</div>
+                        <div class="basket__item-footer">
+                            <div class="basket__item-price">Цена: ${price}сом</div>
+                            <div class="basket__item-number">кол-во: ${number}</div>
                         </div>
-                        <div class="basket__item-close">&times;</div>
+                        <hr>
+                        <div class="basket__item-total_wrapper">
+                            <div class="basket__item-total">Итого:</div>
+                            <div class="basket__item-total_num">${itemTotal}</div>
+                        </div>
                     </div>
+                    <div class="basket__item-close">&times;</div>
                 `;
                 basketList.append(basketItem);               
 

@@ -2493,7 +2493,7 @@ window.addEventListener('DOMContentLoaded', function () {
   Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_0__["default"])('.catalog__screen-tabs', '.catalog__screen-tab', '.catalog__screen', 'catalog__screen-tab_active');
   Object(_modules_basket__WEBPACK_IMPORTED_MODULE_1__["default"])('.basket__content', '.btn-basket', '.basket__close', '.catalog-item', '.basket__list');
   Object(_modules_modals__WEBPACK_IMPORTED_MODULE_2__["default"])('.overlay', '#gross', '.btn-order', '.modal', '.form__sum-num', '.basket__sum-num', '.modal__descr');
-  Object(_modules_pictures__WEBPACK_IMPORTED_MODULE_4__["default"])('.catalog-item', '.catalog-item_img', '.catalog-item_img-hidden', '.overlay');
+  Object(_modules_pictures__WEBPACK_IMPORTED_MODULE_4__["default"])('.catalog-item', '.overlay');
   Object(_modules_forms__WEBPACK_IMPORTED_MODULE_3__["default"])('form', '.form__id-num', '.form__name', '.form__phone', '.form__sum-num', '#thanks', '#gross');
   Object(_modules_header__WEBPACK_IMPORTED_MODULE_5__["default"])();
 });
@@ -2580,7 +2580,8 @@ var basket = function basket(basketSelector, basketBtnSelector, basketCloseSelec
           itemTotal = itemTotal - itemTotal * 0.1;
         }
 
-        basketItem.innerHTML = "\n                    <div class=\"basket__item\">\n                        <img src=\"".concat(img, "\" alt=\"box\" class=\"basket__item-image\">\n                        <div class=\"basket__item_wrapper\">\n                            <div class=\"basket__item-name\">").concat(name, "</div>\n                            <div class=\"basket__item-size\">").concat(size, "</div>\n                            <div class=\"basket__item-footer\">\n                                <div class=\"basket__item-price\">\u0426\u0435\u043D\u0430: ").concat(price, "\u0441\u043E\u043C</div>\n                                <div class=\"basket__item-number\">\u043A\u043E\u043B-\u0432\u043E: ").concat(number, "</div>\n                            </div>\n                            <hr>\n                            <div class=\"basket__item-total_wrapper\">\n                                <div class=\"basket__item-total\">\u0418\u0442\u043E\u0433\u043E:</div>\n                                <div class=\"basket__item-total_num\">").concat(itemTotal, "</div>\n                            </div>\n                        </div>\n                        <div class=\"basket__item-close\">&times;</div>\n                    </div>\n                ");
+        basketItem.classList.add('basket__item');
+        basketItem.innerHTML = "\n                    <img src=\"".concat(img, "\" alt=\"box\" class=\"basket__item-image\">\n                    <div class=\"basket__item_wrapper\">\n                        <div class=\"basket__item-name\">").concat(name, "</div>\n                        <div class=\"basket__item-size\">").concat(size, "</div>\n                        <div class=\"basket__item-footer\">\n                            <div class=\"basket__item-price\">\u0426\u0435\u043D\u0430: ").concat(price, "\u0441\u043E\u043C</div>\n                            <div class=\"basket__item-number\">\u043A\u043E\u043B-\u0432\u043E: ").concat(number, "</div>\n                        </div>\n                        <hr>\n                        <div class=\"basket__item-total_wrapper\">\n                            <div class=\"basket__item-total\">\u0418\u0442\u043E\u0433\u043E:</div>\n                            <div class=\"basket__item-total_num\">").concat(itemTotal, "</div>\n                        </div>\n                    </div>\n                    <div class=\"basket__item-close\">&times;</div>\n                ");
         basketList.append(basketItem);
         var basketItems = document.querySelectorAll('.basket__item-total_num'),
             finalSum = document.querySelector('.basket__sum-num');
@@ -2722,10 +2723,12 @@ var modals = function modals(overlaySelector, grossSelector, btnOrderSelector, m
         document.body.style.overflow = '';
       }
     });
-    overlay.addEventListener('click', function () {
-      modal.style.display = 'none';
-      overlay.style.display = 'none';
-      document.body.style.overflow = '';
+    overlay.addEventListener('click', function (e) {
+      if (e.target.classList.contains('overlay')) {
+        modal.style.display = 'none';
+        overlay.style.display = 'none';
+        document.body.style.overflow = '';
+      }
     });
   });
   btnOrder.addEventListener('click', function () {
@@ -2770,27 +2773,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var pictures = function pictures(catalogItemsSelector, showedImagesSelector, hiddenImagesSelector, overlaySelector) {
+var pictures = function pictures(catalogItemsSelector, overlaySelector) {
   var catalogItems = document.querySelectorAll(catalogItemsSelector),
-      showedImages = document.querySelectorAll(showedImagesSelector),
-      hiddenImages = document.querySelectorAll(hiddenImagesSelector),
       overlay = document.querySelector(overlaySelector),
       imgPopup = document.createElement('div');
   catalogItems.forEach(function (catalogItem, i) {
-    catalogItem.addEventListener('mouseover', function (e) {
-      if (e.target.classList.contains('catalog-item_img')) {
-        showedImages[i].style.display = 'none';
-        hiddenImages[i].style.display = 'block';
-      }
-    });
-    catalogItem.addEventListener('mouseout', function (e) {
-      if (!e.target.classList.contains('catalog-item_img')) {
-        hiddenImages[i].style.display = 'none';
-        showedImages[i].style.display = 'block';
-        showedImages[i].style.transform = 'scale(1)';
-        hiddenImages[i].style.transform = 'scale(1)';
-      }
-    });
     catalogItem.addEventListener('click', function (e) {
       var _catalogItem$dataset = catalogItem.dataset,
           img = _catalogItem$dataset.img,
@@ -2800,7 +2787,8 @@ var pictures = function pictures(catalogItemsSelector, showedImagesSelector, hid
 
       if (e.target.classList.contains('catalog-item_img') || e.target.classList.contains('catalog-item_img-hidden')) {
         overlay.style.display = 'block';
-        imgPopup.innerHTML = "\n                    <div class=\"popup\">\n                        <img src=\"".concat(img, "\" alt=\"box\">\n                    </div>\n                ");
+        imgPopup.classList.add('popup');
+        imgPopup.innerHTML = "\n                    <img src=\"".concat(img, "\" alt=\"box\">\n                ");
         overlay.append(imgPopup);
       }
     });

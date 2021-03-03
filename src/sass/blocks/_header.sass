@@ -2,46 +2,61 @@
     display: flex
     align-items: end
     position: relative
-    height: 70px
+    min-height: 70px
     padding-left: 0
     &__logo
         display: flex
         text-decoration: none
         img
             padding: 5px 10px
-            height: 60px
+            height: 85px
     &__name
         color: #343434
         padding-top: 20px
-        font-size: 25px
-        font-weight: 900     
+        font-size: 18px
+        font-weight: 900   
+        text-transform: uppercase  
     &__list
-        padding-left: 0
-        margin: 27px auto
-    &__item
-        display: inline
-        padding: 0 30px
-        border-right: solid black
-        &:last-child
-            border-right: 0
-    &__link
-        color: black
-        font-size: 20px
-        font-weight: 500
-        text-decoration: none
+        display: flex
+        justify-content: flex-end
+        padding-top: 40px
+        width: 100%
+        &-item
+            display: inline
+            padding: 0 30px
+            border-right: solid black
+            font-weight: 700
+            text-align: center
+            &:hover
+                color: $main-color
+                font-weight: 700
+    // &__item
+    //     display: inline
+    //     padding: 0 30px
+    //     border-right: solid black
+    //     &:last-child
+    //         border-right: 0
+    // &__link
+    //     color: black
+    //     font-size: 20px
+    //     font-weight: 500
+    //     text-decoration: none
     &__consult
-        padding-top: 5px
-        padding-right: 10px
+        padding: 15px 10px 0 20px
+        width: 230px
         &-text
-            padding-top: 5px
-            font-size: 19px
-            font-weight: 500
+            padding-top: 15px
+            font-size: 20px
             text-align: center
         &-phone
             display: block
-            padding-top: 22px
+            padding-top: 5px
+            color: #000
             font-size: 22px
             text-decoration: none
             text-align: center
+            &:hover
+                color: $main-color
+                font-weight: 700
 .hamburger
     display: none

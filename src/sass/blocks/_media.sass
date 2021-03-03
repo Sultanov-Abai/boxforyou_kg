@@ -36,9 +36,13 @@
         &__name
             font-size: 21px
         &__list
-            padding: 0
+            padding-top: 10px
         &__item
             padding: 0 10px
+        &__consult
+            padding-top: 10px
+            &-text
+                padding-top: 0
     .catalog
         &__tab
             width: 150px
@@ -51,12 +55,15 @@
         padding-left: 0
         &__logo
             img
-                height: 50px
+                height: 70px
         &__name 
             display: none
         &__link
             font-size: 18px
         &__consult
+            padding-top: 0
+            &-text
+                padding-top: 0
             &-phone
                 font-size: 18px
     .btn-basket
@@ -118,16 +125,18 @@
     .menu
         &__list
             display: flex
-            left: -100%
             position: absolute
             top: 100%
+            left: -100%
             margin: 0 auto
+            background-color: $border-color
             transition: 0.6s all
             &_active
-                left: 10%
+                left: 0%
         &__consult
             position: absolute
-            right: 40px
+            right: 10px
+            padding-top: 10px
     .hamburger
         display: block
         position: absolute

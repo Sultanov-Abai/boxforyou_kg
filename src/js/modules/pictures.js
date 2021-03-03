@@ -5,7 +5,7 @@ const pictures = (catalogItemsSelector, overlaySelector) => {
 
     catalogItems.forEach((catalogItem, i) => {
         catalogItem.addEventListener('click', e => {
-            let {img, name, size, price} = catalogItem.dataset;
+            let img = document.querySelectorAll('.catalog-item_img')[i].src;
 
             if (e.target.classList.contains('catalog-item_img') || 
             e.target.classList.contains('catalog-item_img-hidden')) {

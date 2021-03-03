@@ -23,11 +23,18 @@ const basket = (basketSelector, basketBtnSelector, basketCloseSelector, catalogI
     catalogItems.forEach((catalogItem, i) => {
         catalogItem.addEventListener('click', e => {
             if (e.target.classList.contains('catalog-item_basket')) {
-                let {img, name, size, price} = catalogItem.dataset,
-                      basketItem = document.createElement('div');
-                let number = document.querySelectorAll('.catalog-item_input')[i].value;
+                // let {img, name, size, price} = catalogItem.dataset,
+                const img = document.querySelectorAll('.catalog-item_img')[i].src,
+                      name = document.querySelectorAll('.catalog-item_name')[i].innerHTML,
+                      size = document.querySelectorAll('.catalog-item_size')[i].innerHTML,
+                      price = document.querySelectorAll('.catalog-item_price')[i].innerHTML;
 
-                let itemTotal = price * number;
+                let count = +price.slice(0, price.length - 3);
+
+                let number = document.querySelectorAll('.catalog-item_input')[i].value,
+                    basketItem = document.createElement('div');
+
+                let itemTotal = count * number;
 
                 if (number > 9) {
                     itemTotal = itemTotal - itemTotal * 0.1;
@@ -40,7 +47,7 @@ const basket = (basketSelector, basketBtnSelector, basketCloseSelector, catalogI
                         <div class="basket__item-name">${name}</div>
                         <div class="basket__item-size">${size}</div>
                         <div class="basket__item-footer">
-                            <div class="basket__item-price">Цена: ${price}сом</div>
+                            <div class="basket__item-price">Цена: ${count}сом</div>
                             <div class="basket__item-number">кол-во: ${number}</div>
                         </div>
                         <hr>

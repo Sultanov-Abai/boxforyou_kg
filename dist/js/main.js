@@ -2242,35 +2242,63 @@ $({ target: 'Array', proto: true, forced: !STRICT_METHOD || !USES_TO_LENGTH || C
 
 /***/ }),
 
-/***/ "./node_modules/core-js/modules/es.function.name.js":
-/*!**********************************************************!*\
-  !*** ./node_modules/core-js/modules/es.function.name.js ***!
-  \**********************************************************/
+/***/ "./node_modules/core-js/modules/es.array.slice.js":
+/*!********************************************************!*\
+  !*** ./node_modules/core-js/modules/es.array.slice.js ***!
+  \********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var DESCRIPTORS = __webpack_require__(/*! ../internals/descriptors */ "./node_modules/core-js/internals/descriptors.js");
-var defineProperty = __webpack_require__(/*! ../internals/object-define-property */ "./node_modules/core-js/internals/object-define-property.js").f;
+"use strict";
 
-var FunctionPrototype = Function.prototype;
-var FunctionPrototypeToString = FunctionPrototype.toString;
-var nameRE = /^\s*function ([^ (]*)/;
-var NAME = 'name';
+var $ = __webpack_require__(/*! ../internals/export */ "./node_modules/core-js/internals/export.js");
+var isObject = __webpack_require__(/*! ../internals/is-object */ "./node_modules/core-js/internals/is-object.js");
+var isArray = __webpack_require__(/*! ../internals/is-array */ "./node_modules/core-js/internals/is-array.js");
+var toAbsoluteIndex = __webpack_require__(/*! ../internals/to-absolute-index */ "./node_modules/core-js/internals/to-absolute-index.js");
+var toLength = __webpack_require__(/*! ../internals/to-length */ "./node_modules/core-js/internals/to-length.js");
+var toIndexedObject = __webpack_require__(/*! ../internals/to-indexed-object */ "./node_modules/core-js/internals/to-indexed-object.js");
+var createProperty = __webpack_require__(/*! ../internals/create-property */ "./node_modules/core-js/internals/create-property.js");
+var wellKnownSymbol = __webpack_require__(/*! ../internals/well-known-symbol */ "./node_modules/core-js/internals/well-known-symbol.js");
+var arrayMethodHasSpeciesSupport = __webpack_require__(/*! ../internals/array-method-has-species-support */ "./node_modules/core-js/internals/array-method-has-species-support.js");
+var arrayMethodUsesToLength = __webpack_require__(/*! ../internals/array-method-uses-to-length */ "./node_modules/core-js/internals/array-method-uses-to-length.js");
 
-// Function instances `.name` property
-// https://tc39.es/ecma262/#sec-function-instances-name
-if (DESCRIPTORS && !(NAME in FunctionPrototype)) {
-  defineProperty(FunctionPrototype, NAME, {
-    configurable: true,
-    get: function () {
-      try {
-        return FunctionPrototypeToString.call(this).match(nameRE)[1];
-      } catch (error) {
-        return '';
+var HAS_SPECIES_SUPPORT = arrayMethodHasSpeciesSupport('slice');
+var USES_TO_LENGTH = arrayMethodUsesToLength('slice', { ACCESSORS: true, 0: 0, 1: 2 });
+
+var SPECIES = wellKnownSymbol('species');
+var nativeSlice = [].slice;
+var max = Math.max;
+
+// `Array.prototype.slice` method
+// https://tc39.es/ecma262/#sec-array.prototype.slice
+// fallback for not array-like ES3 strings and DOM objects
+$({ target: 'Array', proto: true, forced: !HAS_SPECIES_SUPPORT || !USES_TO_LENGTH }, {
+  slice: function slice(start, end) {
+    var O = toIndexedObject(this);
+    var length = toLength(O.length);
+    var k = toAbsoluteIndex(start, length);
+    var fin = toAbsoluteIndex(end === undefined ? length : end, length);
+    // inline `ArraySpeciesCreate` for usage native `Array#slice` where it's possible
+    var Constructor, result, n;
+    if (isArray(O)) {
+      Constructor = O.constructor;
+      // cross-realm fallback
+      if (typeof Constructor == 'function' && (Constructor === Array || isArray(Constructor.prototype))) {
+        Constructor = undefined;
+      } else if (isObject(Constructor)) {
+        Constructor = Constructor[SPECIES];
+        if (Constructor === null) Constructor = undefined;
+      }
+      if (Constructor === Array || Constructor === undefined) {
+        return nativeSlice.call(O, k, fin);
       }
     }
-  });
-}
+    result = new (Constructor === undefined ? Array : Constructor)(max(fin - k, 0));
+    for (n = 0; k < fin; k++, n++) if (k in O) createProperty(result, n, O[k]);
+    result.length = n;
+    return result;
+  }
+});
 
 
 /***/ }),
@@ -2515,8 +2543,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_array_for_each_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each_js__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var core_js_modules_es_array_reduce_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.reduce.js */ "./node_modules/core-js/modules/es.array.reduce.js");
 /* harmony import */ var core_js_modules_es_array_reduce_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_reduce_js__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
-/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.slice.js */ "./node_modules/core-js/modules/es.array.slice.js");
+/* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.regexp.exec.js */ "./node_modules/core-js/modules/es.regexp.exec.js");
 /* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var core_js_modules_es_string_replace_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.string.replace.js */ "./node_modules/core-js/modules/es.string.replace.js");
@@ -2567,21 +2595,22 @@ var basket = function basket(basketSelector, basketBtnSelector, basketCloseSelec
   catalogItems.forEach(function (catalogItem, i) {
     catalogItem.addEventListener('click', function (e) {
       if (e.target.classList.contains('catalog-item_basket')) {
-        var _catalogItem$dataset = catalogItem.dataset,
-            img = _catalogItem$dataset.img,
-            name = _catalogItem$dataset.name,
-            size = _catalogItem$dataset.size,
-            price = _catalogItem$dataset.price,
+        // let {img, name, size, price} = catalogItem.dataset,
+        var img = document.querySelectorAll('.catalog-item_img')[i].src,
+            name = document.querySelectorAll('.catalog-item_name')[i].innerHTML,
+            size = document.querySelectorAll('.catalog-item_size')[i].innerHTML,
+            price = document.querySelectorAll('.catalog-item_price')[i].innerHTML;
+        var count = +price.slice(0, price.length - 3);
+        var number = document.querySelectorAll('.catalog-item_input')[i].value,
             basketItem = document.createElement('div');
-        var number = document.querySelectorAll('.catalog-item_input')[i].value;
-        var itemTotal = price * number;
+        var itemTotal = count * number;
 
         if (number > 9) {
           itemTotal = itemTotal - itemTotal * 0.1;
         }
 
         basketItem.classList.add('basket__item');
-        basketItem.innerHTML = "\n                    <img src=\"".concat(img, "\" alt=\"box\" class=\"basket__item-image\">\n                    <div class=\"basket__item_wrapper\">\n                        <div class=\"basket__item-name\">").concat(name, "</div>\n                        <div class=\"basket__item-size\">").concat(size, "</div>\n                        <div class=\"basket__item-footer\">\n                            <div class=\"basket__item-price\">\u0426\u0435\u043D\u0430: ").concat(price, "\u0441\u043E\u043C</div>\n                            <div class=\"basket__item-number\">\u043A\u043E\u043B-\u0432\u043E: ").concat(number, "</div>\n                        </div>\n                        <hr>\n                        <div class=\"basket__item-total_wrapper\">\n                            <div class=\"basket__item-total\">\u0418\u0442\u043E\u0433\u043E:</div>\n                            <div class=\"basket__item-total_num\">").concat(itemTotal, "</div>\n                        </div>\n                    </div>\n                    <div class=\"basket__item-close\">&times;</div>\n                ");
+        basketItem.innerHTML = "\n                    <img src=\"".concat(img, "\" alt=\"box\" class=\"basket__item-image\">\n                    <div class=\"basket__item_wrapper\">\n                        <div class=\"basket__item-name\">").concat(name, "</div>\n                        <div class=\"basket__item-size\">").concat(size, "</div>\n                        <div class=\"basket__item-footer\">\n                            <div class=\"basket__item-price\">\u0426\u0435\u043D\u0430: ").concat(count, "\u0441\u043E\u043C</div>\n                            <div class=\"basket__item-number\">\u043A\u043E\u043B-\u0432\u043E: ").concat(number, "</div>\n                        </div>\n                        <hr>\n                        <div class=\"basket__item-total_wrapper\">\n                            <div class=\"basket__item-total\">\u0418\u0442\u043E\u0433\u043E:</div>\n                            <div class=\"basket__item-total_num\">").concat(itemTotal, "</div>\n                        </div>\n                    </div>\n                    <div class=\"basket__item-close\">&times;</div>\n                ");
         basketList.append(basketItem);
         var basketItems = document.querySelectorAll('.basket__item-total_num'),
             finalSum = document.querySelector('.basket__sum-num');
@@ -2765,11 +2794,8 @@ var modals = function modals(overlaySelector, grossSelector, btnOrderSelector, m
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_array_for_each_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.for-each.js */ "./node_modules/core-js/modules/es.array.for-each.js");
 /* harmony import */ var core_js_modules_es_array_for_each_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
-/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_2__);
-
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_1__);
 
 
 
@@ -2779,11 +2805,7 @@ var pictures = function pictures(catalogItemsSelector, overlaySelector) {
       imgPopup = document.createElement('div');
   catalogItems.forEach(function (catalogItem, i) {
     catalogItem.addEventListener('click', function (e) {
-      var _catalogItem$dataset = catalogItem.dataset,
-          img = _catalogItem$dataset.img,
-          name = _catalogItem$dataset.name,
-          size = _catalogItem$dataset.size,
-          price = _catalogItem$dataset.price;
+      var img = document.querySelectorAll('.catalog-item_img')[i].src;
 
       if (e.target.classList.contains('catalog-item_img') || e.target.classList.contains('catalog-item_img-hidden')) {
         overlay.style.display = 'block';

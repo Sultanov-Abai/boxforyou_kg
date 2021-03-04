@@ -2517,13 +2517,26 @@ window.addEventListener('DOMContentLoaded', function () {
 
   Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_0__["default"])('.catalog__tabs', '.catalog__tab', '.catalog__content', 'catalog__tab_active');
   Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_0__["default"])('.catalog__craft-tabs', '.catalog__craft-tab', '.catalog__craft', 'catalog__craft-tab_active');
-  Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_0__["default"])('.catalog__holiday-tabs', '.catalog__holiday-tab', '.catalog__holiday', 'catalog__holiday-tab_active');
-  Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_0__["default"])('.catalog__screen-tabs', '.catalog__screen-tab', '.catalog__screen', 'catalog__screen-tab_active');
-  Object(_modules_basket__WEBPACK_IMPORTED_MODULE_1__["default"])('.basket__content', '.btn-basket', '.basket__close', '.catalog-item', '.basket__list');
+  Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_0__["default"])('.catalog__holiday-tabs', '.catalog__holiday-tab', '.catalog__holiday', 'catalog__holiday-tab_active'); // tabs('.catalog__screen-tabs', '.catalog__screen-tab', '.catalog__screen', 'catalog__screen-tab_active');
+  // tabs('.catalog__accessory-tabs', '.catalog__accessory-tab', '.catalog__accessory', 'catalog__accessory-tab_active');
+
+  Object(_modules_basket__WEBPACK_IMPORTED_MODULE_1__["default"])({
+    basketSelector: '.basket__content',
+    basketBtnSelector: '.btn-basket',
+    basketCloseSelector: '.basket__close',
+    catalogItemSelector: '.catalog-item',
+    basketListSelector: '.basket__list',
+    basketContentActive: 'basket__content_active',
+    imgSelector: '.catalog-item_img',
+    nameSelector: '.catalog-item_name',
+    sizeSelector: '.catalog-item_size',
+    priceSelector: '.catalog-item_price',
+    inputSelector: '.catalog-item_input'
+  });
   Object(_modules_modals__WEBPACK_IMPORTED_MODULE_2__["default"])('.overlay', '#gross', '.btn-order', '.modal', '.form__sum-num', '.basket__sum-num', '.modal__descr');
   Object(_modules_pictures__WEBPACK_IMPORTED_MODULE_4__["default"])('.catalog-item', '.overlay');
   Object(_modules_forms__WEBPACK_IMPORTED_MODULE_3__["default"])('form', '.form__id-num', '.form__name', '.form__phone', '.form__sum-num', '#thanks', '#gross');
-  Object(_modules_header__WEBPACK_IMPORTED_MODULE_5__["default"])();
+  Object(_modules_header__WEBPACK_IMPORTED_MODULE_5__["default"])('.menu__list', '.menu__item', '.hamburger', 'hamburger_active', 'menu__list_active');
 });
 
 /***/ }),
@@ -2571,7 +2584,18 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-var basket = function basket(basketSelector, basketBtnSelector, basketCloseSelector, catalogItemSelector, basketListSelector) {
+function basket(_ref) {
+  var basketSelector = _ref.basketSelector,
+      basketBtnSelector = _ref.basketBtnSelector,
+      basketCloseSelector = _ref.basketCloseSelector,
+      catalogItemSelector = _ref.catalogItemSelector,
+      basketListSelector = _ref.basketListSelector,
+      basketContentActive = _ref.basketContentActive,
+      imgSelector = _ref.imgSelector,
+      nameSelector = _ref.nameSelector,
+      sizeSelector = _ref.sizeSelector,
+      priceSelector = _ref.priceSelector,
+      inputSelector = _ref.inputSelector;
   var basket = document.querySelector(basketSelector),
       basketBtn = document.querySelector(basketBtnSelector),
       basketClose = document.querySelector(basketCloseSelector),
@@ -2580,13 +2604,13 @@ var basket = function basket(basketSelector, basketBtnSelector, basketCloseSelec
 
   function showBasket(item) {
     basketBtn.addEventListener('click', function () {
-      item.classList.add('basket__content_active');
+      item.classList.add(basketContentActive);
     });
   }
 
   function hideBasket(item) {
     basketClose.addEventListener('click', function () {
-      item.classList.remove('basket__content_active');
+      item.classList.remove(basketContentActive);
     });
   }
 
@@ -2596,12 +2620,12 @@ var basket = function basket(basketSelector, basketBtnSelector, basketCloseSelec
     catalogItem.addEventListener('click', function (e) {
       if (e.target.classList.contains('catalog-item_basket')) {
         // let {img, name, size, price} = catalogItem.dataset,
-        var img = document.querySelectorAll('.catalog-item_img')[i].src,
-            name = document.querySelectorAll('.catalog-item_name')[i].innerHTML,
-            size = document.querySelectorAll('.catalog-item_size')[i].innerHTML,
-            price = document.querySelectorAll('.catalog-item_price')[i].innerHTML;
-        var count = +price.slice(0, price.length - 3);
-        var number = document.querySelectorAll('.catalog-item_input')[i].value,
+        var img = document.querySelectorAll(imgSelector)[i].src,
+            name = document.querySelectorAll(nameSelector)[i].innerHTML,
+            size = document.querySelectorAll(sizeSelector)[i].innerHTML,
+            price = document.querySelectorAll(priceSelector)[i].innerHTML;
+        var number = document.querySelectorAll(inputSelector)[i].value,
+            count = +price.slice(0, price.length - 3),
             basketItem = document.createElement('div');
         var itemTotal = count * number;
 
@@ -2634,7 +2658,7 @@ var basket = function basket(basketSelector, basketBtnSelector, basketCloseSelec
       }
     });
   });
-};
+}
 
 /* harmony default export */ __webpack_exports__["default"] = (basket);
 
@@ -2700,18 +2724,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var header = function header() {
-  var menu = document.querySelector('.menu__list'),
-      menuItem = document.querySelectorAll('.menu__item'),
-      hamburger = document.querySelector('.hamburger');
+var header = function header(menuSelector, menuitemSelector, hamburgerSelector, hamburgerActive, menulistActive) {
+  var menu = document.querySelector(menuSelector),
+      menuItem = document.querySelectorAll(menuitemSelector),
+      hamburger = document.querySelector(hamburgerSelector);
   hamburger.addEventListener('click', function () {
-    hamburger.classList.toggle('hamburger_active');
-    menu.classList.toggle('menu__list_active');
+    hamburger.classList.toggle(hamburgerActive);
+    menu.classList.toggle(menulistActive);
   });
   menuItem.forEach(function (item) {
     item.addEventListener('click', function () {
-      hamburger.classList.toggle('hamburger_active');
-      menu.classList.toggle('menu__list_active');
+      hamburger.classList.toggle(hamburgerActive);
+      menu.classList.toggle(menulistActive);
     });
   });
 };

@@ -1,17 +1,17 @@
-const header = () => {
-    const menu = document.querySelector('.menu__list'),
-          menuItem = document.querySelectorAll('.menu__item'),
-          hamburger = document.querySelector('.hamburger');
+const header = (menuSelector, menuitemSelector, hamburgerSelector, hamburgerActive, menulistActive) => {
+    const menu = document.querySelector(menuSelector),
+          menuItem = document.querySelectorAll(menuitemSelector),
+          hamburger = document.querySelector(hamburgerSelector);
 
     hamburger.addEventListener('click', () => {
-        hamburger.classList.toggle('hamburger_active');
-        menu.classList.toggle('menu__list_active');
+        hamburger.classList.toggle(hamburgerActive);
+        menu.classList.toggle(menulistActive);
     });
 
     menuItem.forEach(item => {
         item.addEventListener('click', () => {
-            hamburger.classList.toggle('hamburger_active');
-            menu.classList.toggle('menu__list_active');
+            hamburger.classList.toggle(hamburgerActive);
+            menu.classList.toggle(menulistActive);
         });
     });
 };

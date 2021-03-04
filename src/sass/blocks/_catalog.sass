@@ -90,12 +90,31 @@
             &_active
                 font-weight: 700
                 text-decoration: underline
+    &__accessory
+        display: flex
+        justify-content: center
+        flex-wrap: wrap
+        transition: 0.5s all
+        &-tabs
+            display: flex
+            justify-content: center
+            margin: 0 auto
+            transition: 0.5s all
+        &-tab
+            display: flex
+            padding: 5px
+            font-size: 20px
+            cursor: pointer
+            transition: 0.5s all
+            &_active
+                font-weight: 700
+                text-decoration: underline
     &-item
         display: block   
         margin: 10px
         border: 2px solid $border-color
         height: 370px
-        width: 290px
+        width: 320px
         &_wrapper
             padding: 10px      
         &_main
@@ -104,7 +123,7 @@
             text-align: center
         &_img
             height: 200px
-            width: 270px
+            width: 300px
             &-hidden
                 display: none
                 height: 200px

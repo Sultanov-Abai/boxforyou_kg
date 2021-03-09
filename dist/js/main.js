@@ -2706,24 +2706,20 @@ var forms = function forms(formSelector, formIdSelector, formNameSelector, formP
       formSum = document.querySelector(formSumSelector),
       thanksForm = document.querySelector(thanksFormSelector),
       gross = document.querySelector(grossSelector);
-  var id = 1;
-
-  var addId = function addId() {
-    formId.value = id;
-  };
-
-  addId();
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-    var formData = new FormData(form);
-    var request = new XMLHttpRequest();
+    var formData = new FormData(form),
+        request = new XMLHttpRequest(),
+        idNum = localStorage.getItem('orderId');
     request.open('POST', 'mailer/smart.php', true);
     request.send(formData);
     formName.value = '';
     formPhone.value = '';
     formSum.value = '';
-    id = id + 1;
-    addId();
+    idNum = localStorage.setItem('orderId', +idNum + 1);
+    formId.value = +localStorage.getItem('orderId'); // console.log(localStorage.setItem('orderId', +idNum + 1));
+    // console.log(idNum);
+
     gross.style.display = 'none';
     thanksForm.style.display = 'block';
   });

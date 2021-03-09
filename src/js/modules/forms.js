@@ -6,19 +6,13 @@ const forms = (formSelector, formIdSelector, formNameSelector, formPhoneSelector
           formSum = document.querySelector(formSumSelector),
           thanksForm = document.querySelector(thanksFormSelector),
           gross = document.querySelector(grossSelector);
-    let id = 1;
-    
-    const addId = () => {
-        formId.value = id;
-    };
-
-    addId();
 
     form.addEventListener('submit', e => {
         e.preventDefault();
         
-        let formData = new FormData(form);
-        let request = new XMLHttpRequest();
+        let formData = new FormData(form),
+            request = new XMLHttpRequest(),
+            idNum = localStorage.getItem('orderId');
 
         request.open('POST', 'mailer/smart.php', true);
         request.send(formData);
@@ -27,8 +21,10 @@ const forms = (formSelector, formIdSelector, formNameSelector, formPhoneSelector
         formPhone.value = '';
         formSum.value = '';
 
-        id = id + 1;
-        addId();
+        idNum =  localStorage.setItem('orderId', +idNum + 1);
+        formId.value = +localStorage.getItem('orderId');
+        // console.log(localStorage.setItem('orderId', +idNum + 1));
+        // console.log(idNum);
 
         gross.style.display = 'none';
         thanksForm.style.display = 'block';

@@ -2505,7 +2505,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_modals__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/modals */ "./src/js/modules/modals.js");
 /* harmony import */ var _modules_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/forms */ "./src/js/modules/forms.js");
 /* harmony import */ var _modules_pictures__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/pictures */ "./src/js/modules/pictures.js");
-/* harmony import */ var _modules_header__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/header */ "./src/js/modules/header.js");
+/* harmony import */ var _modules_slider__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/slider */ "./src/js/modules/slider.js");
+/* harmony import */ var _modules_header__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/header */ "./src/js/modules/header.js");
+
 
 
 
@@ -2526,6 +2528,7 @@ window.addEventListener('DOMContentLoaded', function () {
     basketCloseSelector: '.basket__close',
     catalogItemSelector: '.catalog-item',
     basketListSelector: '.basket__list',
+    itemBtnSelector: 'catalog-item_basket',
     basketContentActive: 'basket__content_active',
     imgSelector: '.catalog-item_img',
     nameSelector: '.catalog-item_name',
@@ -2536,15 +2539,16 @@ window.addEventListener('DOMContentLoaded', function () {
   Object(_modules_modals__WEBPACK_IMPORTED_MODULE_2__["default"])('.overlay', '#gross', '.btn-order', '.modal', '.form__sum-num', '.basket__sum-num', '.modal__descr');
   Object(_modules_pictures__WEBPACK_IMPORTED_MODULE_4__["default"])('.catalog-item', '.overlay');
   Object(_modules_forms__WEBPACK_IMPORTED_MODULE_3__["default"])('form', '.form__id-num', '.form__name', '.form__phone', '.form__sum-num', '#thanks', '#gross');
-  Object(_modules_header__WEBPACK_IMPORTED_MODULE_5__["default"])('.menu__list', '.menu__item', '.hamburger', 'hamburger_active', 'menu__list_active');
+  Object(_modules_slider__WEBPACK_IMPORTED_MODULE_5__["default"])('.carousel', '.carousel__inner', '.carousel__item', '.carousel__pages', '.carousel__page', '.prev', '.next', 'carousel__page-active');
+  Object(_modules_header__WEBPACK_IMPORTED_MODULE_6__["default"])('.menu__list', '.menu__item', '.hamburger', 'hamburger_active', 'menu__list_active');
 });
 
 /***/ }),
 
-/***/ "./src/js/modules/basket.js":
-/*!**********************************!*\
-  !*** ./src/js/modules/basket.js ***!
-  \**********************************/
+/***/ "./src/js/modules/addBasketItem.js":
+/*!*****************************************!*\
+  !*** ./src/js/modules/addBasketItem.js ***!
+  \*****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -2584,42 +2588,13 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function basket(_ref) {
-  var basketSelector = _ref.basketSelector,
-      basketBtnSelector = _ref.basketBtnSelector,
-      basketCloseSelector = _ref.basketCloseSelector,
-      catalogItemSelector = _ref.catalogItemSelector,
-      basketListSelector = _ref.basketListSelector,
-      basketContentActive = _ref.basketContentActive,
-      imgSelector = _ref.imgSelector,
-      nameSelector = _ref.nameSelector,
-      sizeSelector = _ref.sizeSelector,
-      priceSelector = _ref.priceSelector,
-      inputSelector = _ref.inputSelector;
+var addBasketItem = function addBasketItem(basketSelector, catalogItemSelector, basketListSelector, itemBtnSelector, imgSelector, nameSelector, sizeSelector, priceSelector, inputSelector) {
   var basket = document.querySelector(basketSelector),
-      basketBtn = document.querySelector(basketBtnSelector),
-      basketClose = document.querySelector(basketCloseSelector),
       catalogItems = document.querySelectorAll(catalogItemSelector),
       basketList = document.querySelector(basketListSelector);
-
-  function showBasket(item) {
-    basketBtn.addEventListener('click', function () {
-      item.classList.add(basketContentActive);
-    });
-  }
-
-  function hideBasket(item) {
-    basketClose.addEventListener('click', function () {
-      item.classList.remove(basketContentActive);
-    });
-  }
-
-  showBasket(basket);
-  hideBasket(basket);
   catalogItems.forEach(function (catalogItem, i) {
     catalogItem.addEventListener('click', function (e) {
-      if (e.target.classList.contains('catalog-item_basket')) {
-        // let {img, name, size, price} = catalogItem.dataset,
+      if (e.target.classList.contains(itemBtnSelector)) {
         var img = document.querySelectorAll(imgSelector)[i].src,
             name = document.querySelectorAll(nameSelector)[i].innerHTML,
             size = document.querySelectorAll(sizeSelector)[i].innerHTML,
@@ -2658,6 +2633,56 @@ function basket(_ref) {
       }
     });
   });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (addBasketItem);
+
+/***/ }),
+
+/***/ "./src/js/modules/basket.js":
+/*!**********************************!*\
+  !*** ./src/js/modules/basket.js ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _addBasketItem__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./addBasketItem */ "./src/js/modules/addBasketItem.js");
+
+
+function basket(_ref) {
+  var basketSelector = _ref.basketSelector,
+      basketBtnSelector = _ref.basketBtnSelector,
+      basketCloseSelector = _ref.basketCloseSelector,
+      catalogItemSelector = _ref.catalogItemSelector,
+      basketListSelector = _ref.basketListSelector,
+      itemBtnSelector = _ref.itemBtnSelector,
+      basketContentActive = _ref.basketContentActive,
+      imgSelector = _ref.imgSelector,
+      nameSelector = _ref.nameSelector,
+      sizeSelector = _ref.sizeSelector,
+      priceSelector = _ref.priceSelector,
+      inputSelector = _ref.inputSelector;
+  var basket = document.querySelector(basketSelector),
+      basketBtn = document.querySelector(basketBtnSelector),
+      basketClose = document.querySelector(basketCloseSelector);
+
+  function showBasket(item) {
+    basketBtn.addEventListener('click', function () {
+      item.classList.add(basketContentActive);
+    });
+  }
+
+  function hideBasket(item) {
+    basketClose.addEventListener('click', function () {
+      item.classList.remove(basketContentActive);
+    });
+  }
+
+  showBasket(basket);
+  hideBasket(basket);
+  Object(_addBasketItem__WEBPACK_IMPORTED_MODULE_0__["default"])(basketSelector, catalogItemSelector, basketListSelector, itemBtnSelector, imgSelector, nameSelector, sizeSelector, priceSelector, inputSelector);
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (basket);
@@ -2842,6 +2867,121 @@ var pictures = function pictures(catalogItemsSelector, overlaySelector) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (pictures);
+
+/***/ }),
+
+/***/ "./src/js/modules/slider.js":
+/*!**********************************!*\
+  !*** ./src/js/modules/slider.js ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_es_array_for_each_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.for-each.js */ "./node_modules/core-js/modules/es.array.for-each.js");
+/* harmony import */ var core_js_modules_es_array_for_each_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.array.slice.js */ "./node_modules/core-js/modules/es.array.slice.js");
+/* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.regexp.exec.js */ "./node_modules/core-js/modules/es.regexp.exec.js");
+/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_string_replace_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.string.replace.js */ "./node_modules/core-js/modules/es.string.replace.js");
+/* harmony import */ var core_js_modules_es_string_replace_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_replace_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _addBasketItem__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./addBasketItem */ "./src/js/modules/addBasketItem.js");
+
+
+
+
+
+
+
+var slider = function slider(wrapperSelector, innerSelector, slidesSelector, btnsListSelector, btnsSelector, prevSelector, nextSelector, activeClass) {
+  var wrapper = document.querySelector(wrapperSelector),
+      inner = document.querySelector(innerSelector),
+      slides = document.querySelectorAll(slidesSelector),
+      btnsList = document.querySelector(btnsListSelector),
+      btns = document.querySelectorAll(btnsSelector),
+      prev = document.querySelector(prevSelector),
+      next = document.querySelector(nextSelector),
+      width = window.getComputedStyle(wrapper).width;
+  var offset = 0;
+  slides.forEach(function (slide) {
+    slide.style.width = width;
+  });
+  btns.forEach(function (btn, i) {
+    btn.addEventListener('click', function () {
+      var math = i * +width.slice(0, width.length - 2);
+      inner.style.transform = "translateX(-".concat(math, "px)");
+    });
+  });
+  next.addEventListener('click', function () {
+    if (offset == +width.slice(0, width.length - 2) * (slides.length - 1)) {
+      offset = 0;
+    } else {
+      offset += +width.slice(0, width.length - 2);
+    }
+
+    var newWidth = +width.slice(0, width.length - 2);
+
+    function nextArrow() {
+      var i = offset / newWidth;
+      hideActive();
+      showActive(i);
+    }
+
+    nextArrow();
+    inner.style.transform = "translateX(-".concat(offset, "px)");
+  });
+  prev.addEventListener('click', function () {
+    if (offset == 0) {
+      offset = +width.slice(0, width.length - 2) * (slides.length - 1);
+    } else {
+      offset -= +width.slice(0, width.length - 2);
+    }
+
+    var newWidth = +width.slice(0, width.length - 2);
+
+    function prevArrow() {
+      var i = offset / newWidth;
+      hideActive();
+      showActive(i);
+    }
+
+    prevArrow();
+    inner.style.transform = "translateX(-".concat(offset, "px)");
+  });
+
+  function hideActive() {
+    btns.forEach(function (item) {
+      item.classList.remove(activeClass);
+    });
+  }
+
+  function showActive() {
+    var i = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+    btns[i].classList.add(activeClass);
+  }
+
+  hideActive();
+  showActive();
+  btnsList.addEventListener('click', function (e) {
+    var target = e.target;
+
+    if (target && (target.classList.contains(btnsSelector.replace(/\./, '')) || target.parentNode.classList.contains(btnsSelector.replace(/\./, '')))) {
+      btns.forEach(function (item, i) {
+        if (target == item || target.parentNode == item) {
+          hideActive();
+          showActive(i);
+        }
+      });
+    }
+  });
+  Object(_addBasketItem__WEBPACK_IMPORTED_MODULE_5__["default"])('.basket__content', slidesSelector, '.basket__list', 'carousel__order-btn', '.carousel__item-img img', '.carousel__info-title', '.carousel__info-size', '.carousel__info-new', '.carousel__order-input');
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (slider);
 
 /***/ }),
 

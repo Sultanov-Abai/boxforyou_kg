@@ -3,6 +3,7 @@ import basket from "./modules/basket";
 import modals from "./modules/modals";
 import forms from "./modules/forms";
 import pictures from "./modules/pictures";
+import slider from "./modules/slider";
 import header from "./modules/header";
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -19,6 +20,7 @@ window.addEventListener('DOMContentLoaded', () => {
         basketCloseSelector: '.basket__close',
         catalogItemSelector: '.catalog-item',
         basketListSelector: '.basket__list',
+        itemBtnSelector: 'catalog-item_basket',
         basketContentActive: 'basket__content_active',
         imgSelector: '.catalog-item_img',
         nameSelector: '.catalog-item_name',
@@ -29,5 +31,6 @@ window.addEventListener('DOMContentLoaded', () => {
     modals('.overlay', '#gross', '.btn-order', '.modal', '.form__sum-num', '.basket__sum-num', '.modal__descr');
     pictures('.catalog-item', '.overlay');
     forms('form', '.form__id-num', '.form__name', '.form__phone', '.form__sum-num', '#thanks', '#gross');
+    slider('.carousel', '.carousel__inner', '.carousel__item', '.carousel__pages', '.carousel__page', '.prev', '.next', 'carousel__page-active');
     header('.menu__list', '.menu__item', '.hamburger', 'hamburger_active', 'menu__list_active');
 });

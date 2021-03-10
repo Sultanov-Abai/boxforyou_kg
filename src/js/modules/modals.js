@@ -20,6 +20,7 @@ const modals = (overlaySelector, grossSelector, btnOrderSelector, modalsSelector
                 modal.style.display = 'none';
                 overlay.style.display = 'none';
                 document.body.style.overflow = '';
+                document.querySelector('.popup').style.display = 'none'; 
             }
         });
     });  

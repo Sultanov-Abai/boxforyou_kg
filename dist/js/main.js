@@ -2523,7 +2523,8 @@ window.addEventListener('DOMContentLoaded', function () {
   // tabs('.catalog__accessory-tabs', '.catalog__accessory-tab', '.catalog__accessory', 'catalog__accessory-tab_active');
 
   Object(_modules_basket__WEBPACK_IMPORTED_MODULE_1__["default"])({
-    basketSelector: '.basket__content',
+    basketSelector: '.basket',
+    basketContentSelector: '.basket__content',
     basketBtnSelector: '.btn-basket',
     basketCloseSelector: '.basket__close',
     catalogItemSelector: '.catalog-item',
@@ -2626,9 +2627,11 @@ var addBasketItem = function addBasketItem(basketSelector, catalogItemSelector, 
             if (e.target.classList.contains('basket__item-close')) {
               basketEl.remove();
               document.querySelector('.basket__sum-num').innerHTML = sum - basketItems[i].innerHTML;
+              document.querySelector('.basket__length').innerHTML = basketElems.length - 1;
             }
           });
         });
+        document.querySelector('.basket__length').innerHTML = basketElems.length;
         basket.style.display = 'block';
       }
     });
@@ -2653,6 +2656,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function basket(_ref) {
   var basketSelector = _ref.basketSelector,
+      basketContentSelector = _ref.basketContentSelector,
       basketBtnSelector = _ref.basketBtnSelector,
       basketCloseSelector = _ref.basketCloseSelector,
       catalogItemSelector = _ref.catalogItemSelector,
@@ -2665,11 +2669,14 @@ function basket(_ref) {
       priceSelector = _ref.priceSelector,
       inputSelector = _ref.inputSelector;
   var basket = document.querySelector(basketSelector),
+      basketContent = document.querySelector(basketContentSelector),
       basketBtn = document.querySelector(basketBtnSelector),
       basketClose = document.querySelector(basketCloseSelector);
 
   function showBasket(item) {
     basketBtn.addEventListener('click', function () {
+      basket.style.display = 'block';
+      document.body.style.overflow = 'hidden';
       item.classList.add(basketContentActive);
     });
   }
@@ -2677,12 +2684,18 @@ function basket(_ref) {
   function hideBasket(item) {
     basketClose.addEventListener('click', function () {
       item.classList.remove(basketContentActive);
+      document.body.style.overflow = '';
+    });
+    basket.addEventListener('click', function () {
+      basketContent.classList.remove(basketContentActive);
+      basket.style.display = 'none';
+      document.body.style.overflow = '';
     });
   }
 
-  showBasket(basket);
-  hideBasket(basket);
-  Object(_addBasketItem__WEBPACK_IMPORTED_MODULE_0__["default"])(basketSelector, catalogItemSelector, basketListSelector, itemBtnSelector, imgSelector, nameSelector, sizeSelector, priceSelector, inputSelector);
+  showBasket(basketContent);
+  hideBasket(basketContent);
+  Object(_addBasketItem__WEBPACK_IMPORTED_MODULE_0__["default"])(basketContentSelector, catalogItemSelector, basketListSelector, itemBtnSelector, imgSelector, nameSelector, sizeSelector, priceSelector, inputSelector);
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (basket);
@@ -2802,6 +2815,7 @@ var modals = function modals(overlaySelector, grossSelector, btnOrderSelector, m
         modal.style.display = 'none';
         overlay.style.display = 'none';
         document.body.style.overflow = '';
+        document.querySelector('.popup').style.display = 'none';
       }
     });
   });
@@ -2850,12 +2864,14 @@ var pictures = function pictures(catalogItemsSelector, overlaySelector) {
       imgPopup = document.createElement('div');
   catalogItems.forEach(function (catalogItem, i) {
     catalogItem.addEventListener('click', function (e) {
-      var img = document.querySelectorAll('.catalog-item_img')[i].src;
+      var img = document.querySelectorAll('.catalog-item_img')[i].src,
+          popup = document.querySelector('.popup');
 
-      if (e.target.classList.contains('catalog-item_img') || e.target.classList.contains('catalog-item_img-hidden')) {
+      if (e.target.classList.contains('catalog-item_img')) {
         overlay.style.display = 'block';
         imgPopup.classList.add('popup');
         imgPopup.innerHTML = "\n                    <img src=\"".concat(img, "\" alt=\"box\">\n                ");
+        imgPopup.style.display = 'block';
         overlay.append(imgPopup);
       }
     });

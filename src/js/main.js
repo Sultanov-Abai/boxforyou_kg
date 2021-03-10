@@ -15,7 +15,8 @@ window.addEventListener('DOMContentLoaded', () => {
     // tabs('.catalog__screen-tabs', '.catalog__screen-tab', '.catalog__screen', 'catalog__screen-tab_active');
     // tabs('.catalog__accessory-tabs', '.catalog__accessory-tab', '.catalog__accessory', 'catalog__accessory-tab_active');
     basket({
-        basketSelector: '.basket__content',
+        basketSelector: '.basket',
+        basketContentSelector: '.basket__content',
         basketBtnSelector: '.btn-basket',
         basketCloseSelector: '.basket__close',
         catalogItemSelector: '.catalog-item',

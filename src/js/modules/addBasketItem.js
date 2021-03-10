@@ -39,7 +39,7 @@ const addBasketItem = (basketSelector, catalogItemSelector, basketListSelector, 
                     </div>
                     <div class="basket__item-close">&times;</div>
                 `;
-                basketList.append(basketItem);               
+                basketList.append(basketItem);  
 
                 const basketItems = document.querySelectorAll('.basket__item-total_num'),
                       finalSum = document.querySelector('.basket__sum-num');
@@ -55,9 +55,12 @@ const addBasketItem = (basketSelector, catalogItemSelector, basketListSelector, 
                         if (e.target.classList.contains('basket__item-close')) {
                             basketEl.remove();
                             document.querySelector('.basket__sum-num').innerHTML = sum - basketItems[i].innerHTML;
+                            document.querySelector('.basket__length').innerHTML = basketElems.length - 1; 
                         }
                     });
                 });
+                document.querySelector('.basket__length').innerHTML = basketElems.length; 
+
             basket.style.display = 'block';
             }
         });

@@ -16,7 +16,7 @@ $mail->isSMTP();                                      // Set mailer to use SMTP
 $mail->Host = 'smtp.mail.ru';  // Specify main and backup SMTP servers
 $mail->SMTPAuth = true;                               // Enable SMTP authentication
 $mail->Username = 'boxforyoukg@mail.ru';        // Наш логин
-$mail->Password = 'd12062003';                         // Наш пароль от ящика
+$mail->Password = 'a12042013';                         // Наш пароль от ящика
 $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
 $mail->Port = 465;                                    // TCP port to connect to
  
@@ -34,7 +34,7 @@ $mail->Subject = 'Заказ №' . $id;
 $mail->Body    = '
 		Пользователь оставил данные <br> 
 	Имя: ' . $name . ' <br>
-	Номер телефона: ' . $phone . '<br>
+	Номер телефона: <a href="tel:'. $phone .'">'. $phone .'</a><br>
 	Список товаров: ' . $list . '<br>
 	Конечная сумма: ' . $sum;
 

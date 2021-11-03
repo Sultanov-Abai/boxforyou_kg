@@ -2518,10 +2518,13 @@ window.addEventListener('DOMContentLoaded', function () {
   "use strict";
 
   Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_0__["default"])('.catalog__tabs', '.catalog__tab', '.catalog__content', 'catalog__tab_active');
-  Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_0__["default"])('.catalog__craft-tabs', '.catalog__craft-tab', '.catalog__craft', 'catalog__craft-tab_active');
   Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_0__["default"])('.catalog__holiday-tabs', '.catalog__holiday-tab', '.catalog__holiday', 'catalog__holiday-tab_active');
-  Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_0__["default"])('.catalog__screen-tabs', '.catalog__screen-tab', '.catalog__screen', 'catalog__screen-tab_active'); // tabs('.catalog__accessory-tabs', '.catalog__accessory-tab', '.catalog__accessory', 'catalog__accessory-tab_active');
-
+  Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_0__["default"])('.catalog__christmas-tabs', '.catalog__christmas-tab', '.catalog__christmas', 'catalog__christmas-tab_active');
+  Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_0__["default"])('.catalog__craft-tabs', '.catalog__craft-tab', '.catalog__craft', 'catalog__craft-tab_active');
+  Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_0__["default"])('.catalog__white-tabs', '.catalog__white-tab', '.catalog__white', 'catalog__white-tab_active');
+  Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_0__["default"])('.catalog__print-tabs', '.catalog__print-tab', '.catalog__print', 'catalog__print-tab_active');
+  Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_0__["default"])('.catalog__screen-tabs', '.catalog__screen-tab', '.catalog__screen', 'catalog__screen-tab_active');
+  Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_0__["default"])('.catalog__accessory-tabs', '.catalog__accessory-tab', '.catalog__accessory', 'catalog__accessory-tab_active');
   Object(_modules_basket__WEBPACK_IMPORTED_MODULE_1__["default"])({
     basketSelector: '.basket',
     basketContentSelector: '.basket__content',
@@ -2539,8 +2542,8 @@ window.addEventListener('DOMContentLoaded', function () {
   });
   Object(_modules_modals__WEBPACK_IMPORTED_MODULE_2__["default"])('.overlay', '#gross', '.btn-order', '.modal', '.form__sum-num', '.basket__sum-num', '.modal__descr');
   Object(_modules_pictures__WEBPACK_IMPORTED_MODULE_4__["default"])('.catalog-item', '.overlay');
-  Object(_modules_forms__WEBPACK_IMPORTED_MODULE_3__["default"])('form', '.form__id-num', '.form__name', '.form__phone', '.form__sum-num', '#thanks', '#gross');
-  Object(_modules_slider__WEBPACK_IMPORTED_MODULE_5__["default"])('.carousel', '.carousel__inner', '.carousel__item', '.carousel__pages', '.carousel__page', '.prev', '.next', 'carousel__page-active');
+  Object(_modules_forms__WEBPACK_IMPORTED_MODULE_3__["default"])('form', '.form__id-num', '.form__name', '.form__phone', '.form__sum-num', '#thanks', '#gross'); // slider('.carousel', '.carousel__inner', '.carousel__item', '.carousel__pages', '.carousel__page', '.prev', '.next', 'carousel__page-active');
+
   Object(_modules_header__WEBPACK_IMPORTED_MODULE_6__["default"])('.menu__list', '.menu__item', '.hamburger', 'hamburger_active', 'menu__list_active');
 });
 

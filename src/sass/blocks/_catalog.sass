@@ -33,11 +33,12 @@
         transition: 1s all
         &_active
             display: flex
-    &__craft
+    &__craft, &__white, &__holiday, &__screen, &__accessory, &__print, &__christmas
         display: flex
         justify-content: center
         flex-wrap: wrap
         transition: 0.5s all
+        background-color: rgba(255, 255, 255, 0)
         &-tabs
             display: flex
             justify-content: center
@@ -52,7 +53,6 @@
             &_active
                 font-weight: 700
                 text-decoration: underline
-    &__white
         display: flex
         justify-content: center
         flex-wrap: wrap
@@ -68,106 +68,13 @@
             font-size: 20px
             cursor: pointer
             transition: 0.5s all
-            &_active
-                font-weight: 700
-                text-decoration: underline
-    &__holiday
-        display: flex
-        justify-content: center
-        flex-wrap: wrap
-        transition: 0.5s all
-        &-tabs
-            display: flex
-            justify-content: center
-            margin: 0 auto
-            transition: 0.5s all
-        &-tab
-            display: flex
-            padding: 5px
-            font-size: 20px
-            cursor: pointer
-            transition: 0.5s all
-            &_active
-                font-weight: 700
-                text-decoration: underline
-    &__screen
-        display: flex
-        justify-content: center
-        flex-wrap: wrap
-        transition: 0.5s all
-        &-tabs
-            display: flex
-            justify-content: center
-            margin: 0 auto
-            transition: 0.5s all
-        &-tab
-            display: flex
-            padding: 5px
-            font-size: 20px
-            cursor: pointer
-            transition: 0.5s all
-            &_active
-                font-weight: 700
-                text-decoration: underline
-    &__accessory
-        display: flex
-        justify-content: center
-        flex-wrap: wrap
-        transition: 0.5s all
-        &-tabs
-            display: flex
-            justify-content: center
-            margin: 0 auto
-            transition: 0.5s all
-        &-tab
-            display: flex
-            padding: 5px
-            font-size: 20px
-            cursor: pointer
-            transition: 0.5s all
-            &_active
-                font-weight: 700
-                text-decoration: underline
-    &__print
-        display: flex
-        justify-content: center
-        flex-wrap: wrap
-        transition: 0.5s all
-        &-tabs
-            display: flex
-            justify-content: center
-            margin: 0 auto
-            transition: 0.5s all
-        &-tab
-            display: flex
-            padding: 5px
-            font-size: 20px
-            cursor: pointer
-            transition: 0.5s all
-            &_active
-                font-weight: 700
-                text-decoration: underline
-    &__christmas
-        display: flex
-        justify-content: center
-        flex-wrap: wrap
-        transition: 0.5s all
-        &-tabs
-            display: flex
-            justify-content: center
-            margin: 0 auto
-            transition: 0.5s all
-        &-tab
-            display: flex
-            padding: 5px
-            font-size: 20px
-            cursor: pointer
-            transition: 0.5s all
+            color: white
             &_active
                 font-weight: 700
                 text-decoration: underline
     &-item
-        display: block   
+        display: block
+        background-color: #fff 
         margin: 10px
         border: 2px solid $border-color
         min-height: 370px

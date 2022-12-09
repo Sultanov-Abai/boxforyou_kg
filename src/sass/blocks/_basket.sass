@@ -1,0 +1,113 @@
+.basket
+    display: none
+    position: fixed
+    width: 100%
+    height: 100%
+    top: 0
+    background-color: rgba(0,0,0,.6)
+    z-index: 4
+    &__content
+        display: none
+        position: fixed
+        overflow: scroll
+        top: 5px
+        right: 5px
+        height: 100vh
+        width: 460px
+        background-color: #ffffff
+        border: solid 3px $border-color
+        z-index: 3
+        &_active
+            display: block
+            right: 0
+    .title
+        display: flex
+        justify-content: center
+        margin-top: 10px
+    &__close
+        display: inline
+        position: absolute
+        top: 1px
+        right: 1%
+        font-size: 45px
+        cursor: pointer
+    &__item
+        display: flex
+        margin:  25px auto
+        width: 92%
+        border: solid 3px $border-color
+        &_wrapper
+            display: flex
+            flex-direction: column
+            margin: 5px 5px 5px 0
+        &-image
+            display: inline
+            width: 50%
+            margin: 5px
+        &-name
+            display: inline
+            font-size: 16px
+            font-weight: 700
+            padding-bottom: 5px
+            text-align: center
+        &-size
+            display: inline
+            font-size: 15px
+            font-weight: 600
+            padding-bottom: 5px
+            text-align: center
+        &-footer
+            display: flex
+            justify-content: space-evenly
+        &-number
+            display: inline
+            font-size: 14px
+            font-weight: 600
+            padding-bottom: 5px
+        &-price
+            display: inline
+            font-size: 14px
+            font-weight: 600
+            color: $main-color  
+            padding-bottom: 5px
+        hr
+            width: 100%
+        &-total
+            padding-left: 50px
+            font-weight: 700
+            text-align: center
+            &_wrapper
+                display: flex
+            &_num
+                padding-left: 5px
+        &-close
+            position: relative
+            right: 11px
+            padding-right: 5px
+            font-size: 28px
+            cursor: pointer
+            height: 28px
+    &__hr
+        margin: 20px auto
+        width: 100%
+    &__sum
+        display: flex
+        justify-content: center
+        width: 100%
+        margin: 10px auto
+        &-final
+            display: flex
+            justify-content: center
+            width: 50%
+            margin: 8px 0
+        &-total
+            color: #000
+            text-decoration: none
+            cursor: pointer
+            padding-left: 20px
+            font-size: 20px
+            font-weight: 700
+        &-num
+            padding-left: 10px
+            font-size: 20px
+            font-weight: 700

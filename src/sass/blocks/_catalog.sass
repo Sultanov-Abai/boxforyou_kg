@@ -1,0 +1,99 @@
+.catalog
+    padding-top: 30px
+    padding-bottom: 60px
+    &__tabs
+        display: flex
+        justify-content: center
+        flex-wrap: wrap
+        padding-top: 30px
+        padding-left: 0
+    &__tab
+        display: flex
+        justify-content: center
+        margin: 5px 4px 
+        height: 40px
+        width: 180px
+        background-color: #ffffff
+        border: 2px solid $border-color
+        transform: skewX(-30deg)
+        cursor: pointer 
+        transition: 0.5s all
+        &-text
+            margin: auto 0
+            font-size: 24px
+            transform: skewX(30deg)
+            color: #000000
+        &_active
+            background-color: $main-color
+    &__content
+        display: none
+        flex-direction: column
+        flex-wrap: wrap
+        padding-top: 60px
+        transition: 1s all
+        &_active
+            display: flex
+    &__sep, &__open, &__holiday, &__screen, &__accessory, &__print, &__christmas
+        display: flex
+        justify-content: center
+        flex-wrap: wrap
+        transition: 0.5s all
+        &-tabs
+            display: flex
+            justify-content: center
+            margin: 0 auto
+            transition: 0.5s all
+        &-tab
+            display: flex
+            padding: 5px
+            font-size: 20px
+            cursor: pointer
+            transition: 0.5s all
+            color: white
+            &_active
+                font-weight: 700
+                text-decoration: underline
+    &-item
+        display: block
+        background-color: #fff 
+        margin: 10px
+        border: 2px solid $border-color
+        min-height: 370px
+        width: 320px
+        &_wrapper
+            padding: 10px      
+        &_main
+            padding-bottom: 5px
+            line-height: 26px
+            text-align: center
+        &_img
+            height: 200px
+            width: 300px
+            &-hidden
+                display: none
+                height: 200px
+                width: 270px
+        &_name
+            font-size: 19px
+        &_size
+            font-size: 18px
+        &_price
+            font-size: 16px
+            font-weight: 600
+            color: $main-color       
+            text-align: center
+        &_sale
+            font-size: 13px
+            font-weight: 300
+            line-height: 13px
+            text-align: left
+        &_footer
+            display: flex
+            justify-content: space-between
+            padding: 5px
+        &_input
+            width: 50%
+            height: 28px
+        &_basket
+            margin: 0 1px
+            cursor: pointer

@@ -500,7 +500,6 @@ window.addEventListener('DOMContentLoaded', () => {
   "use strict";
 
   (0,_modules_tabs__WEBPACK_IMPORTED_MODULE_0__["default"])('.catalog__tabs', '.catalog__tab', '.catalog__content', 'catalog__tab_active');
-  (0,_modules_tabs__WEBPACK_IMPORTED_MODULE_0__["default"])('.catalog__christmas-tabs', '.catalog__christmas-tab', '.catalog__christmas', 'catalog__christmas-tab_active');
   (0,_modules_tabs__WEBPACK_IMPORTED_MODULE_0__["default"])('.catalog__print-tabs', '.catalog__print-tab', '.catalog__print', 'catalog__print-tab_active');
   (0,_modules_tabs__WEBPACK_IMPORTED_MODULE_0__["default"])('.catalog__holiday-tabs', '.catalog__holiday-tab', '.catalog__holiday', 'catalog__holiday-tab_active');
   (0,_modules_tabs__WEBPACK_IMPORTED_MODULE_0__["default"])('.catalog__sep-tabs', '.catalog__sep-tab', '.catalog__sep', 'catalog__sep-tab_active');

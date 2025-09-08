@@ -1,8 +1,9 @@
 const gulp  = require('gulp'),
       browserSync = require('browser-sync'),
-      sass = require('gulp-sass')(require('node-sass')),
+      sass = require('gulp-sass')(require('sass')),
       rename = require('gulp-rename'),
-      autoprefixer = require('gulp-autoprefixer'),
+      postcss = require('gulp-postcss'),
+      autoprefixer = require('autoprefixer'),
       cleanCSS = require('gulp-clean-css'),
       htmlmin = require('gulp-htmlmin'),
       webpack = require('webpack-stream'),
@@ -18,19 +19,17 @@ gulp.task('server', function() {
     gulp.watch('src/*.html').on("change", browserSync.reload);
 });
 
-gulp.task('styles', function() {
+gulp.task('styles', function () {
     return gulp.src('src/sass/**/*.+(scss|sass)')
-            .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
-            .pipe(rename({
-                prefix: "",
-                suffix: ".min",
-            }))
-            .pipe(autoprefixer({
-                cascade: false
-            }))
-            .pipe(cleanCSS({compatibility: 'ie8'}))
-            .pipe(gulp.dest('dist/css'))
-            .pipe(browserSync.stream());
+        .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
+        .pipe(rename({
+            prefix: "",
+            suffix: ".min",
+        }))
+        .pipe(postcss([autoprefixer()]))
+        .pipe(cleanCSS({ compatibility: 'ie8' }))
+        .pipe(gulp.dest('dist/css'))
+        .pipe(browserSync.stream());
 });
 
 gulp.task('watch', function() {
@@ -49,10 +48,10 @@ gulp.task('scripts', () => {
         .pipe(gulp.dest("dist/js"));
 });
 
-gulp.task('fonts', () => {
-    return gulp.src("src/fonts/**/*")
-        .pipe(gulp.dest("dist/fonts"));
-});
+// gulp.task('fonts', () => {
+//    return gulp.src("src/fonts/**/*")
+//        .pipe(gulp.dest("dist/fonts"));
+//});
 
 gulp.task('icons', () => {
     return gulp.src("src/icons/**/*")
@@ -64,10 +63,23 @@ gulp.task('mailer', () => {
         .pipe(gulp.dest("dist/mailer"));
 });
 
-gulp.task('img', () => {
-    return gulp.src("src/img/**/*")
-        .pipe(imagemin())
-        .pipe(gulp.dest("dist/img"));
+gulp.task('img', async () => {
+    const mozjpeg = (await import('imagemin-mozjpeg')).default,
+          optipng = (await import('imagemin-optipng')).default,
+          svgo = (await import('imagemin-svgo')).default;
+
+    return gulp.src('./src/img/**/*')
+        .pipe(imagemin([
+            mozjpeg({ quality: 75, progressive: true }),
+            optipng({ optimizationLevel: 5 }),
+            svgo({
+                plugins: [
+                    { name: 'removeViewBox', active: false },
+                    { name: 'cleanupIDs', active: false }
+                ]
+            })
+        ]))
+    .pipe(gulp.dest('./dist/img/'));
 });
 
 gulp.task("build-js", () => {
@@ -103,4 +115,6 @@ gulp.task("build-js", () => {
 });
 
 gulp.task('build', gulp.parallel('build-js'));
-gulp.task('default', gulp.parallel('watch', 'server', 'styles', 'scripts', 'fonts', 'html', 'icons', 'mailer', 'img', "build"));
+gulp.task('default', gulp.parallel('watch', 'server', 'styles', 'scripts', 
+//    'fonts',
+'html', 'icons', 'mailer', 'img', "build"));

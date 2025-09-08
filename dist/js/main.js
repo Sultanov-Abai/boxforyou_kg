@@ -1,4 +1,4 @@
-/******/ (function() { // webpackBootstrap
+/******/ (() => { // webpackBootstrap
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
@@ -6,29 +6,30 @@
 /*!*****************************************!*\
   !*** ./src/js/modules/addBasketItem.js ***!
   \*****************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
 const addBasketItem = (basketSelector, catalogItemSelector, basketListSelector, itemBtnSelector, imgSelector, nameSelector, sizeSelector, priceSelector, inputSelector) => {
   const basket = document.querySelector(basketSelector),
-        catalogItems = document.querySelectorAll(catalogItemSelector),
-        basketList = document.querySelector(basketListSelector);
+    catalogItems = document.querySelectorAll(catalogItemSelector),
+    basketList = document.querySelector(basketListSelector);
   catalogItems.forEach((catalogItem, i) => {
     catalogItem.addEventListener('click', e => {
       if (e.target.classList.contains(itemBtnSelector)) {
         const img = document.querySelectorAll(imgSelector)[i].src,
-              name = document.querySelectorAll(nameSelector)[i].innerHTML,
-              size = document.querySelectorAll(sizeSelector)[i].innerHTML,
-              price = document.querySelectorAll(priceSelector)[i].innerHTML;
+          name = document.querySelectorAll(nameSelector)[i].innerHTML,
+          size = document.querySelectorAll(sizeSelector)[i].innerHTML,
+          price = document.querySelectorAll(priceSelector)[i].innerHTML;
         let number = document.querySelectorAll(inputSelector)[i].value,
-            count = +price.slice(0, price.length - 3),
-            basketItem = document.createElement('div');
+          count = +price.slice(0, price.length - 3),
+          basketItem = document.createElement('div');
         let itemTotal = count * number;
-
         if (number > 9) {
           itemTotal = itemTotal - itemTotal * 0.1;
         }
-
         basketItem.classList.add('basket__item');
         basketItem.innerHTML = `
                     <img src="${img}" alt="box" class="basket__item-image">
@@ -49,7 +50,7 @@ const addBasketItem = (basketSelector, catalogItemSelector, basketListSelector, 
                 `;
         basketList.append(basketItem);
         const basketItems = document.querySelectorAll('.basket__item-total_num'),
-              finalSum = document.querySelector('.basket__sum-num');
+          finalSum = document.querySelector('.basket__sum-num');
         const sum = [...basketItems].reduce((count, item) => {
           count += parseFloat(item.textContent.replace(/(\..*)\./g, ""));
           return count;
@@ -71,8 +72,7 @@ const addBasketItem = (basketSelector, catalogItemSelector, basketListSelector, 
     });
   });
 };
-
-/* harmony default export */ __webpack_exports__["default"] = (addBasketItem);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (addBasketItem);
 
 /***/ }),
 
@@ -80,33 +80,33 @@ const addBasketItem = (basketSelector, catalogItemSelector, basketListSelector, 
 /*!**********************************!*\
   !*** ./src/js/modules/basket.js ***!
   \**********************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
 /* harmony import */ var _addBasketItem__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./addBasketItem */ "./src/js/modules/addBasketItem.js");
 
-
-function basket(_ref) {
-  let {
-    basketSelector,
-    basketContentSelector,
-    basketBtnSelector,
-    basketCloseSelector,
-    catalogItemSelector,
-    basketListSelector,
-    itemBtnSelector,
-    basketContentActive,
-    imgSelector,
-    nameSelector,
-    sizeSelector,
-    priceSelector,
-    inputSelector
-  } = _ref;
+function basket({
+  basketSelector,
+  basketContentSelector,
+  basketBtnSelector,
+  basketCloseSelector,
+  catalogItemSelector,
+  basketListSelector,
+  itemBtnSelector,
+  basketContentActive,
+  imgSelector,
+  nameSelector,
+  sizeSelector,
+  priceSelector,
+  inputSelector
+}) {
   const basket = document.querySelector(basketSelector),
-        basketContent = document.querySelector(basketContentSelector),
-        basketBtn = document.querySelector(basketBtnSelector),
-        basketClose = document.querySelector(basketCloseSelector);
-
+    basketContent = document.querySelector(basketContentSelector),
+    basketBtn = document.querySelector(basketBtnSelector),
+    basketClose = document.querySelector(basketCloseSelector);
   function showBasket(item) {
     basketBtn.addEventListener('click', () => {
       basket.style.display = 'block';
@@ -114,7 +114,6 @@ function basket(_ref) {
       item.classList.add(basketContentActive);
     });
   }
-
   function hideBasket(item) {
     basketClose.addEventListener('click', () => {
       item.classList.remove(basketContentActive);
@@ -126,13 +125,11 @@ function basket(_ref) {
       document.body.style.overflow = '';
     });
   }
-
   showBasket(basketContent);
   hideBasket(basketContent);
   (0,_addBasketItem__WEBPACK_IMPORTED_MODULE_0__["default"])(basketContentSelector, catalogItemSelector, basketListSelector, itemBtnSelector, imgSelector, nameSelector, sizeSelector, priceSelector, inputSelector);
 }
-
-/* harmony default export */ __webpack_exports__["default"] = (basket);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (basket);
 
 /***/ }),
 
@@ -140,37 +137,40 @@ function basket(_ref) {
 /*!*********************************!*\
   !*** ./src/js/modules/forms.js ***!
   \*********************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
 const forms = (formSelector, formIdSelector, formNameSelector, formPhoneSelector, formSumSelector, thanksFormSelector, grossSelector) => {
   const form = document.querySelector(formSelector),
-        formId = document.querySelector(formIdSelector),
-        formName = document.querySelector(formNameSelector),
-        formPhone = document.querySelector(formPhoneSelector),
-        formSum = document.querySelector(formSumSelector),
-        thanksForm = document.querySelector(thanksFormSelector),
-        gross = document.querySelector(grossSelector);
+    formId = document.querySelector(formIdSelector),
+    formName = document.querySelector(formNameSelector),
+    formPhone = document.querySelector(formPhoneSelector),
+    formSum = document.querySelector(formSumSelector),
+    thanksForm = document.querySelector(thanksFormSelector),
+    gross = document.querySelector(grossSelector);
   form.addEventListener('submit', e => {
     e.preventDefault();
     let formData = new FormData(form),
-        request = new XMLHttpRequest(),
-        idNum = localStorage.getItem('orderId');
+      request = new XMLHttpRequest(),
+      idNum = localStorage.getItem('orderId');
     request.open('POST', 'mailer/smart.php', true);
     request.send(formData);
     formName.value = '';
     formPhone.value = '';
     formSum.value = '';
     idNum = localStorage.setItem('orderId', +idNum + 1);
-    formId.value = +localStorage.getItem('orderId'); // console.log(localStorage.setItem('orderId', +idNum + 1));
+    formId.value = +localStorage.getItem('orderId');
+    // console.log(localStorage.setItem('orderId', +idNum + 1));
     // console.log(idNum);
 
     gross.style.display = 'none';
     thanksForm.style.display = 'block';
   });
 };
-
-/* harmony default export */ __webpack_exports__["default"] = (forms);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (forms);
 
 /***/ }),
 
@@ -178,13 +178,16 @@ const forms = (formSelector, formIdSelector, formNameSelector, formPhoneSelector
 /*!**********************************!*\
   !*** ./src/js/modules/header.js ***!
   \**********************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
 const header = (menuSelector, menuitemSelector, hamburgerSelector, hamburgerActive, menulistActive) => {
   const menu = document.querySelector(menuSelector),
-        menuItem = document.querySelectorAll(menuitemSelector),
-        hamburger = document.querySelector(hamburgerSelector);
+    menuItem = document.querySelectorAll(menuitemSelector),
+    hamburger = document.querySelector(hamburgerSelector);
   hamburger.addEventListener('click', () => {
     hamburger.classList.toggle(hamburgerActive);
     menu.classList.toggle(menulistActive);
@@ -196,8 +199,7 @@ const header = (menuSelector, menuitemSelector, hamburgerSelector, hamburgerActi
     });
   });
 };
-
-/* harmony default export */ __webpack_exports__["default"] = (header);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (header);
 
 /***/ }),
 
@@ -205,17 +207,20 @@ const header = (menuSelector, menuitemSelector, hamburgerSelector, hamburgerActi
 /*!**********************************!*\
   !*** ./src/js/modules/modals.js ***!
   \**********************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
 const modals = (overlaySelector, grossSelector, btnOrderSelector, modalsSelector, modalSumSelector, basketSumSelector, modalListSelector) => {
   const overlay = document.querySelector(overlaySelector),
-        gross = document.querySelector(grossSelector),
-        btnOrder = document.querySelector(btnOrderSelector),
-        modals = document.querySelectorAll(modalsSelector),
-        modalSum = document.querySelector(modalSumSelector),
-        basketSum = document.querySelector(basketSumSelector),
-        modalList = document.querySelector(modalListSelector);
+    gross = document.querySelector(grossSelector),
+    btnOrder = document.querySelector(btnOrderSelector),
+    modals = document.querySelectorAll(modalsSelector),
+    modalSum = document.querySelector(modalSumSelector),
+    basketSum = document.querySelector(basketSumSelector),
+    modalList = document.querySelector(modalListSelector);
   modals.forEach(modal => {
     modal.addEventListener('click', e => {
       if (e.target.classList.contains('modal__close')) {
@@ -238,22 +243,19 @@ const modals = (overlaySelector, grossSelector, btnOrderSelector, modalsSelector
     overlay.style.display = 'block';
     document.body.style.overflow = 'hidden';
     const names = document.querySelectorAll('.basket__item-name'),
-          sizes = document.querySelectorAll('.basket__item-size'),
-          numbers = document.querySelectorAll('.basket__item-number'),
-          sums = document.querySelectorAll('.basket__item-total_num');
+      sizes = document.querySelectorAll('.basket__item-size'),
+      numbers = document.querySelectorAll('.basket__item-number'),
+      sums = document.querySelectorAll('.basket__item-total_num');
     const quantity = sums.length;
     let i = 0;
-
     for (i = 0; i < quantity; i++) {
       modalList.innerHTML = modalList.innerHTML + names[i].innerHTML + " " + sizes[i].innerHTML + ", " + numbers[i].innerHTML + " - " + sums[i].innerHTML + `сом;
             <br> `;
     }
-
     modalSum.value = basketSum.innerHTML;
   });
 };
-
-/* harmony default export */ __webpack_exports__["default"] = (modals);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (modals);
 
 /***/ }),
 
@@ -261,18 +263,20 @@ const modals = (overlaySelector, grossSelector, btnOrderSelector, modalsSelector
 /*!************************************!*\
   !*** ./src/js/modules/pictures.js ***!
   \************************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
 const pictures = (catalogItemsSelector, overlaySelector) => {
   const catalogItems = document.querySelectorAll(catalogItemsSelector),
-        overlay = document.querySelector(overlaySelector),
-        imgPopup = document.createElement('div');
+    overlay = document.querySelector(overlaySelector),
+    imgPopup = document.createElement('div');
   catalogItems.forEach((catalogItem, i) => {
     catalogItem.addEventListener('click', e => {
       let img = document.querySelectorAll('.catalog-item_img')[i].src,
-          popup = document.querySelector('.popup');
-
+        popup = document.querySelector('.popup');
       if (e.target.classList.contains('catalog-item_img')) {
         overlay.style.display = 'block';
         imgPopup.classList.add('popup');
@@ -285,8 +289,7 @@ const pictures = (catalogItemsSelector, overlaySelector) => {
     });
   });
 };
-
-/* harmony default export */ __webpack_exports__["default"] = (pictures);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (pictures);
 
 /***/ }),
 
@@ -294,21 +297,23 @@ const pictures = (catalogItemsSelector, overlaySelector) => {
 /*!**********************************!*\
   !*** ./src/js/modules/slider.js ***!
   \**********************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
 /* harmony import */ var _addBasketItem__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./addBasketItem */ "./src/js/modules/addBasketItem.js");
-
 
 const slider = (wrapperSelector, innerSelector, slidesSelector, btnsListSelector, btnsSelector, prevSelector, nextSelector, activeClass) => {
   const wrapper = document.querySelector(wrapperSelector),
-        inner = document.querySelector(innerSelector),
-        slides = document.querySelectorAll(slidesSelector),
-        btnsList = document.querySelector(btnsListSelector),
-        btns = document.querySelectorAll(btnsSelector),
-        prev = document.querySelector(prevSelector),
-        next = document.querySelector(nextSelector),
-        width = window.getComputedStyle(wrapper).width;
+    inner = document.querySelector(innerSelector),
+    slides = document.querySelectorAll(slidesSelector),
+    btnsList = document.querySelector(btnsListSelector),
+    btns = document.querySelectorAll(btnsSelector),
+    prev = document.querySelector(prevSelector),
+    next = document.querySelector(nextSelector),
+    width = window.getComputedStyle(wrapper).width;
   let offset = 0;
   slides.forEach(slide => {
     slide.style.width = width;
@@ -325,15 +330,12 @@ const slider = (wrapperSelector, innerSelector, slidesSelector, btnsListSelector
     } else {
       offset += +width.slice(0, width.length - 2);
     }
-
     let newWidth = +width.slice(0, width.length - 2);
-
     function nextArrow() {
       let i = offset / newWidth;
       hideActive();
       showActive(i);
     }
-
     nextArrow();
     inner.style.transform = `translateX(-${offset}px)`;
   });
@@ -343,35 +345,27 @@ const slider = (wrapperSelector, innerSelector, slidesSelector, btnsListSelector
     } else {
       offset -= +width.slice(0, width.length - 2);
     }
-
     let newWidth = +width.slice(0, width.length - 2);
-
     function prevArrow() {
       let i = offset / newWidth;
       hideActive();
       showActive(i);
     }
-
     prevArrow();
     inner.style.transform = `translateX(-${offset}px)`;
   });
-
   function hideActive() {
     btns.forEach(item => {
       item.classList.remove(activeClass);
     });
   }
-
-  function showActive() {
-    let i = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+  function showActive(i = 0) {
     btns[i].classList.add(activeClass);
   }
-
   hideActive();
   showActive();
   btnsList.addEventListener('click', e => {
     const target = e.target;
-
     if (target && (target.classList.contains(btnsSelector.replace(/\./, '')) || target.parentNode.classList.contains(btnsSelector.replace(/\./, '')))) {
       btns.forEach((item, i) => {
         if (target == item || target.parentNode == item) {
@@ -383,8 +377,7 @@ const slider = (wrapperSelector, innerSelector, slidesSelector, btnsListSelector
   });
   (0,_addBasketItem__WEBPACK_IMPORTED_MODULE_0__["default"])('.basket__content', slidesSelector, '.basket__list', 'carousel__order-btn', '.carousel__item-img img', '.carousel__info-title', '.carousel__info-size', '.carousel__info-new', '.carousel__order-input');
 };
-
-/* harmony default export */ __webpack_exports__["default"] = (slider);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (slider);
 
 /***/ }),
 
@@ -392,15 +385,16 @@ const slider = (wrapperSelector, innerSelector, slidesSelector, btnsListSelector
 /*!********************************!*\
   !*** ./src/js/modules/tabs.js ***!
   \********************************/
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
-const tabs = function (headerSelector, tabSelector, contentSelector, activeClass) {
-  let display = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : "flex";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+const tabs = (headerSelector, tabSelector, contentSelector, activeClass, display = "flex") => {
   const header = document.querySelector(headerSelector),
-        tab = document.querySelectorAll(tabSelector),
-        content = document.querySelectorAll(contentSelector);
-
+    tab = document.querySelectorAll(tabSelector),
+    content = document.querySelectorAll(contentSelector);
   function hideTabContent() {
     content.forEach(item => {
       item.style.display = 'none';
@@ -409,18 +403,14 @@ const tabs = function (headerSelector, tabSelector, contentSelector, activeClass
       item.classList.remove(activeClass);
     });
   }
-
-  function showTabContent() {
-    let i = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+  function showTabContent(i = 0) {
     content[i].style.display = display;
     tab[i].classList.add(activeClass);
   }
-
   hideTabContent();
   showTabContent();
   header.addEventListener('click', e => {
     const target = e.target;
-
     if (target && (target.classList.contains(tabSelector.replace(/\./, '')) || target.parentNode.classList.contains(tabSelector.replace(/\./, '')))) {
       tab.forEach((item, i) => {
         if (target == item || target.parentNode == item) {
@@ -431,8 +421,7 @@ const tabs = function (headerSelector, tabSelector, contentSelector, activeClass
     }
   });
 };
-
-/* harmony default export */ __webpack_exports__["default"] = (tabs);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (tabs);
 
 /***/ })
 
@@ -463,21 +452,38 @@ const tabs = function (headerSelector, tabSelector, contentSelector, activeClass
 /******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/make namespace object */
-/******/ 	!function() {
+/******/ 	(() => {
 /******/ 		// define __esModule on exports
-/******/ 		__webpack_require__.r = function(exports) {
+/******/ 		__webpack_require__.r = (exports) => {
 /******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
 /******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
 /******/ 			}
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
-/******/ 	}();
+/******/ 	})();
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
-!function() {
+// This entry needs to be wrapped in an IIFE because it needs to be isolated against other modules in the chunk.
+(() => {
 /*!************************!*\
   !*** ./src/js/main.js ***!
   \************************/
@@ -523,11 +529,12 @@ window.addEventListener('DOMContentLoaded', () => {
   });
   (0,_modules_modals__WEBPACK_IMPORTED_MODULE_2__["default"])('.overlay', '#gross', '.btn-order', '.modal', '.form__sum-num', '.basket__sum-num', '.modal__descr');
   (0,_modules_pictures__WEBPACK_IMPORTED_MODULE_4__["default"])('.catalog-item', '.overlay');
-  (0,_modules_forms__WEBPACK_IMPORTED_MODULE_3__["default"])('form', '.form__id-num', '.form__name', '.form__phone', '.form__sum-num', '#thanks', '#gross'); // slider('.carousel', '.carousel__inner', '.carousel__item', '.carousel__pages', '.carousel__page', '.prev', '.next', 'carousel__page-active');
-
+  (0,_modules_forms__WEBPACK_IMPORTED_MODULE_3__["default"])('form', '.form__id-num', '.form__name', '.form__phone', '.form__sum-num', '#thanks', '#gross');
+  // slider('.carousel', '.carousel__inner', '.carousel__item', '.carousel__pages', '.carousel__page', '.prev', '.next', 'carousel__page-active');
   (0,_modules_header__WEBPACK_IMPORTED_MODULE_6__["default"])('.menu__list', '.menu__item', '.hamburger', 'hamburger_active', 'menu__list_active');
 });
-}();
+})();
+
 /******/ })()
 ;
 //# sourceMappingURL=main.js.map

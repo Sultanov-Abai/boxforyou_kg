@@ -12,11 +12,11 @@ const gulp  = require('gulp'),
 gulp.task('server', function() {
     browserSync.init({
         server: {
-            baseDir: "dist"
+            baseDir: 'dist'
         }
     });
 
-    gulp.watch('src/*.html').on("change", browserSync.reload);
+    gulp.watch('src/*.html').on('change', browserSync.reload);
 });
 
 gulp.task('styles', function () {
@@ -54,13 +54,13 @@ gulp.task('scripts', () => {
 //});
 
 gulp.task('icons', () => {
-    return gulp.src("src/icons/**/*")
-        .pipe(gulp.dest("dist/icons"));
+    return gulp.src("src/icons/**/*", { encoding: false })
+        .pipe(gulp.dest('dist/icons'), { encoding: false });
 });
 
 gulp.task('mailer', () => {
-    return gulp.src("src/mailer/**/*")
-        .pipe(gulp.dest("dist/mailer"));
+    return gulp.src('src/mailer/**/*')
+        .pipe(gulp.dest('dist/mailer'));
 });
 
 gulp.task('img', async () => {
@@ -68,22 +68,22 @@ gulp.task('img', async () => {
           optipng = (await import('imagemin-optipng')).default,
           svgo = (await import('imagemin-svgo')).default;
 
-    return gulp.src('./src/img/**/*')
+    return gulp.src('./src/img/**/*', { encoding: false })
         .pipe(imagemin([
             mozjpeg({ quality: 75, progressive: true }),
             optipng({ optimizationLevel: 5 }),
             svgo({
                 plugins: [
-                    { name: 'removeViewBox', active: false },
-                    { name: 'cleanupIDs', active: false }
+                    { name: 'removeViewBox', active: true },
+                    { name: 'cleanupIDs', active: true }
                 ]
             })
         ]))
-    .pipe(gulp.dest('./dist/img/'));
+    .pipe(gulp.dest('./dist/img', { encoding: false }));
 });
 
-gulp.task("build-js", () => {
-    return gulp.src("./src/js/main.js")
+gulp.task('build-js', () => {
+    return gulp.src('./src/js/main.js')
                 .pipe(webpack({
                     mode: 'development',
                     output: {
@@ -115,6 +115,6 @@ gulp.task("build-js", () => {
 });
 
 gulp.task('build', gulp.parallel('build-js'));
-gulp.task('default', gulp.parallel('watch', 'server', 'styles', 'scripts', 
+gulp.task('default', gulp.parallel('watch',  'styles', 'scripts', 
 //    'fonts',
-'html', 'icons', 'mailer', 'img', "build"));
+'html', 'icons', 'mailer', 'img', 'build', 'server'));
